@@ -2,17 +2,16 @@ website:
   sidebar:
     contents:
       - index.ipynb
+      - section: Blog
+        contents:
+          - 000_Blog/000_2022TueDec13.ipynb
+          - 000_Blog/001_2022ThuDec15.ipynb
+          - 000_Blog/002_2022MonDec19.ipynb
+          - 000_Blog/003_2022TueDec20.ipynb
+          - 000_Blog/003_2023TueJan3.ipynb
+          - 000_Blog/003_scRNA.ipynb
       - section: Puzzles
         contents:
-          - 000_Puzzles/002_2022MonDec19.ipynb
-          - 000_Puzzles/003_2022TueDec20.ipynb
-      - section: scRNA-seq
-        contents:
-          - 100_scRNA-seq/003_scRNA.ipynb
-      - section: Blogging
-        contents:
-          - 800_Blogging/000_2022TueDec13.ipynb
-          - 800_Blogging/001_2022ThuDec15.ipynb
-      - section: Phd Life
-        contents:
-          - 900_Phd Life/003_2022TueJan3.ipynb
+          - 500_Puzzles/BnV_001.ipynb
+          - 500_Puzzles/BnV_002.ipynb
+          - 500_Puzzles/BnV_003.ipynb
