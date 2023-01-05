@@ -8,6 +8,7 @@ format:
     toc: true
 
 website:
+  title: "Bailey's Site"
   twitter-card: true
   open-graph: true
   repo-actions: [issue]

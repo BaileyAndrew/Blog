@@ -2,7 +2,7 @@ project:
   output-dir: _docs
 
 website:
-  title: "Blog"
+  title: "Bailey's Blog #Blog"
   site-url: "https://BaileyAndrew.github.io/Blog"
   description: "A blog."
   repo-branch: main
