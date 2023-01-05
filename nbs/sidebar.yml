@@ -2,16 +2,15 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - section: Blog
-        contents:
-          - 000_Blog/000_2022TueDec13.ipynb
-          - 000_Blog/001_2022ThuDec15.ipynb
-          - 000_Blog/002_2022MonDec19.ipynb
-          - 000_Blog/003_2022TueDec20.ipynb
-          - 000_Blog/003_2023TueJan3.ipynb
-          - 000_Blog/003_scRNA.ipynb
+      #- section: Blog
+      #  contents:
+      #    - 000_Blog/000_2022TueDec13.ipynb
+      #    - 000_Blog/001_2022ThuDec15.ipynb
+      #    - 000_Blog/002_2022MonDec19.ipynb
+      #    - 000_Blog/003_2022TueDec20.ipynb
+      #    - 000_Blog/003_2023TueJan3.ipynb
+      #    - 000_Blog/003_scRNA.ipynb
       - section: Puzzles
         contents:
-          - 500_Puzzles/BnV_001.ipynb
-          - 500_Puzzles/BnV_002.ipynb
-          - 500_Puzzles/BnV_003.ipynb
+          - 500_Puzzles/BnV.ipynb
+      - Blog.ipynb
