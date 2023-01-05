@@ -2,7 +2,8 @@ website:
   sidebar:
     contents:
       - index.ipynb
+      - Blog.ipynb
       - section: Puzzles
         contents:
           - 500_Puzzles/BnV.ipynb
-      - Blog.ipynb
+      - OtherBlogs.ipynb
