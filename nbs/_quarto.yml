@@ -18,4 +18,7 @@ website:
   sidebar:
     style: floating
 
+execute:
+  freeze: auto
+
 metadata-files: [nbdev.yml, sidebar.yml]
