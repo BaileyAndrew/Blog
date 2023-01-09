@@ -1,0 +1,26 @@
+.callout-tip #custom-callout :is(h1, h2, h3, h4, h5, h6) {
+  color:#C0CF96;
+}
+
+#custom-callout2 div.callout-caption-container.flex-fill {
+  color:#C0CF96;
+  font-weight:bold;
+}
+
+#custom-callout2 div.callout-icon-container {
+  opacity:0%;
+}
+
+#clean-collapse div.callout-caption-container.flex-fill {
+  color:#C0CF96;
+  font-weight:bold;
+}
+
+#clean-collapse div.callout-icon-container {
+  opacity:0%;
+}
+
+#clean-collapse div.callout-header.d-flex.align-content-center.collapsed {
+  color:#C0CF96;
+  font-weight:bold;
+}
