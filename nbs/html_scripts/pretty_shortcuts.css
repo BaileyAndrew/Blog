@@ -22,3 +22,15 @@
     /*font-weight: bold;*/
     color: #C0CF96;
 }
+
+.sidequests {
+    -webkit-text-fill-color: #C0CF96;
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: #537FBF;
+}
+
+.false-starts {
+    -webkit-text-fill-color: #A6A440;
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: #EB1960;
+}
