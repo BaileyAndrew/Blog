@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bailey Andrew">
+<meta name="dcterms.date" content="2023-01-10">
+<meta name="description" content="A side quest in understanding how to work with genetic data.">
+
+<title>Bailey’s Blog - Exploring Ensembl</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../html_scripts/collapse.css">
+<link rel="stylesheet" href="../../html_scripts/pretty_shortcuts.css">
+<meta property="og:title" content="Bailey’s Blog - Exploring Ensembl">
+<meta property="og:description" content="A side quest in understanding how to work with genetic data.">
+<meta property="og:site-name" content="Bailey's Blog">
+<meta name="twitter:title" content="Bailey’s Blog - Exploring Ensembl">
+<meta name="twitter:description" content="A side quest in understanding how to work with genetic data.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Bailey’s Blog</span>
+    </a>
+  </div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Exploring Ensembl</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../blog.html" class="sidebar-item-text sidebar-link">Blog</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Puzzles</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../500_Puzzles/bnv.html" class="sidebar-item-text sidebar-link">Boulders in Valleys</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../otherblogs.html" class="sidebar-item-text sidebar-link">Other People’s Blogs</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Exploring Ensembl</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Work</div>
+    <div class="quarto-category">Useful</div>
+    <div class="quarto-category">Omics</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A side quest in understanding how to work with genetic data.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bailey Andrew </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 10, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>So, I’ve been working on <a href="./004_004_exploration.html">blog posts</a> that do a walkthrough on working with genetic data. I keep running into issues and having to go on <b class="sidequests">sidequests</b> (😅) but I think this one deserves its own blog post. Shoutout to Morgan for the help.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ensemble.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The <b style="color:#EB1960">Ensemble</b> homepage</figcaption><p></p>
+</figure>
+</div>
+<p>A major resource in bioinformatics is <b style="color:#EB1960">Ensembl</b>. In this blog post, we’ll spend some time exploring it, capping off with using it to accomplish the useful task of how to grab all known mitochondrial genes in Zebrafish (<i style="color:#EB1960">Danio rerio</i>).</p>
+<p>Suppose in our dataset we had a gene called <code>ENSDARG00000000001</code>. What can we actually say about it? Well, first of all, this is an <b style="color:#A6A440">Ensembl ID</b>, so it <a href="http://www.ensembl.org/info/genome/stable_ids/index.html">follows the pattern</a> <code>ENS[species prefix][feature type prefix][a unique eleven digit number]</code>. In this case, <code>DAR</code> is the species (<i style="color:#EB1960"><strong>Da</strong>nio <strong>r</strong>erio</i>) and <code>G</code> indicates that it is referring to a gene.</p>
+<p>We can look this gene up on <b style="color:#EB1960">Ensembl</b> to learn more about it:</p>
+<p><img src="ensemble-0001.png" class="img-fluid"></p>
+<p>This gene is also known as <b style="color:#A6A440">slc35a5</b>, but these names can be harder to work with as it is subject to change if our knowledge about its role in biological processes changes; the <b style="color:#A6A440">Ensembl ID</b> is more permanent. On the other hand, this name is arguably more informative, as it is an abbreviation for its role as “solute carrier family 35 member A5”.</p>
+<p>If we want to investigate this gene more, we can click on the <b style="color:#EB1960">ZFIN</b> link <a href="http://zfin.org/ZDB-GENE-030616-55#summary">provided in the summary section</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="zfin.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><b style="color:#EB1960">ZFIN</b> page for ENSDARG00000000001</figcaption><p></p>
+</figure>
+</div>
+<p>Here we can see yet another gene ID (<code>ZDB-GENE-030616-55</code>), as well as a link to the naming history of this gene which may be fun to explore. There are some other goodies on this page, but we’ll return to <b style="color:#EB1960">Enbembl</b> as that is the topic of this post.</p>
+<p>Our goal is to get a list of all mitochondrial genes in <i style="color:#EB1960">Danio rerio</i>. <code>ENSDARG00000000001</code> is not a mitochondrial gene, because it is located on chromosome 9. One way to find a list of mitochondrial genes is to search for genes with names beginning with <code>mt-</code>, because that is how mitochondrial genes are named.</p>
+<p><img src="mt-search.png" class="img-fluid"></p>
+<p>However, this isn’t convenient for manual use!</p>
+<details>
+<summary style="color:#C0CF96">
+<b>Failed attempt at using <code>scanpy</code></b>
+</summary>
+<p>One way to try to get this data is to use <a href="https://scanpy.readthedocs.io/en/stable/generated/scanpy.queries.mitochondrial_genes.html">scanpy</a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I had to also install pybiomart, which was only on pip</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scanpy <span class="im">import</span> queries</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>queries.mitochondrial_genes(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"drerio"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    attrname <span class="op">=</span> <span class="st">"ensembl_gene_id"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>HTTPError: 500 Server Error: Internal Server Error for url: http://www.ensembl.org:80/biomart/martservice?type=registry</code></pre>
+</div>
+</div>
+<p>Unfortunately, <b style="color:#EB1960">Biomart</b> was down at the time I tried to do this! (<b style="color:#EB1960">Biomart</b> seems to be the api for this type of stuff).</p>
+<blockquote class="blockquote">
+<p>Use this data-mining tool to export custom datasets from Ensembl.</p>
+<p>– <cite><a href="http://www.ensembl.org/info/docs/tools/index.html">Ensemble docs about what Biomart is</a></cite></p>
+</blockquote>
+<p>I found that the “asia” mirror of <b style="color:#EB1960">Biomart</b> gives a different error:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mitgenes <span class="op">=</span> queries.mitochondrial_genes(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"drerio"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    attrname <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    host <span class="op">=</span> <span class="st">"asia.ensembl.org"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>mitgenes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>HTTPError: 504 Server Error: Gateway Time-out for url: http://asia.ensembl.org:80/biomart/martservice?type=registry</code></pre>
+</div>
+</div>
+</details>
+<p>Another way to get the data is to search by location. We can play around with their region-searcher to see that the mitochondrial dna of a zebrafish is just over 16 kilobases long (16,596 bases to be exact).</p>
+<p><img src="loc-search.png" class="img-fluid"></p>
+<p>If we do that, we can find this cute overview of the mitochondrial dna:</p>
+<p><img src="mitdna.png" class="img-fluid"></p>
+<p>Not relevant to us, though - we want to click on the “export” button, which will give us this popup:</p>
+<p><img src="export.png" class="img-fluid"></p>
+<p>You can then download all the mitochondrial data! It’s a rather small file that looks like this:</p>
+<pre><code>seqname,source,feature,start,end,score,strand,frame,hid,hstart,hend,genscan,gene_id,transcript_id,exon_id,gene_type,variation_name,probe_name
+MT,EVA,variation,113,113,.,+,.,,,,,,,,,rs508804888,
+[...]
+MT,Ensembl,gene,951,1019,.,+,0,,,,,ENSDARG00000083480.3,ENSDART00000116162.3,ENSDARE00000880048,Mt_tRNA,,
+[...]</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mito_data <span class="op">=</span> pd.read_csv(<span class="st">"./localdata/mt-danio-rerio.txt"</span>, sep<span class="op">=</span><span class="st">","</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mito_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>seqname</th>
+      <th>source</th>
+      <th>feature</th>
+      <th>start</th>
+      <th>end</th>
+      <th>score</th>
+      <th>strand</th>
+      <th>frame</th>
+      <th>hid</th>
+      <th>hstart</th>
+      <th>hend</th>
+      <th>genscan</th>
+      <th>gene_id</th>
+      <th>transcript_id</th>
+      <th>exon_id</th>
+      <th>gene_type</th>
+      <th>variation_name</th>
+      <th>probe_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>MT</td>
+      <td>EVA</td>
+      <td>variation</td>
+      <td>113</td>
+      <td>113</td>
+      <td>.</td>
+      <td>+</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rs508804888</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MT</td>
+      <td>EVA</td>
+      <td>variation</td>
+      <td>239</td>
+      <td>239</td>
+      <td>.</td>
+      <td>+</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rs513784503</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MT</td>
+      <td>EVA</td>
+      <td>variation</td>
+      <td>314</td>
+      <td>314</td>
+      <td>.</td>
+      <td>+</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rs504526537</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MT</td>
+      <td>EVA</td>
+      <td>variation</td>
+      <td>339</td>
+      <td>339</td>
+      <td>.</td>
+      <td>+</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rs511578098</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MT</td>
+      <td>EVA</td>
+      <td>variation</td>
+      <td>438</td>
+      <td>438</td>
+      <td>.</td>
+      <td>+</td>
+      <td>.</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>rs514602887</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>174</th>
+      <td>MT</td>
+      <td>Ensembl</td>
+      <td>gene</td>
+      <td>14714</td>
+      <td>15232</td>
+      <td>.</td>
+      <td>-</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ENSDARG00000063922.3</td>
+      <td>ENSDART00000093623.3</td>
+      <td>ENSDARE00000685766</td>
+      <td>protein_coding</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>MT</td>
+      <td>Ensembl</td>
+      <td>gene</td>
+      <td>15233</td>
+      <td>15301</td>
+      <td>.</td>
+      <td>-</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ENSDARG00000083312.3</td>
+      <td>ENSDART00000116823.3</td>
+      <td>ENSDARE00000882905</td>
+      <td>Mt_tRNA</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>MT</td>
+      <td>Ensembl</td>
+      <td>gene</td>
+      <td>15308</td>
+      <td>16448</td>
+      <td>.</td>
+      <td>+</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ENSDARG00000063924.3</td>
+      <td>ENSDART00000093625.3</td>
+      <td>ENSDARE00000685768</td>
+      <td>protein_coding</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>177</th>
+      <td>MT</td>
+      <td>Ensembl</td>
+      <td>gene</td>
+      <td>16449</td>
+      <td>16520</td>
+      <td>.</td>
+      <td>+</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ENSDARG00000083462.3</td>
+      <td>ENSDART00000116552.3</td>
+      <td>ENSDARE00000881627</td>
+      <td>Mt_tRNA</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>178</th>
+      <td>MT</td>
+      <td>Ensembl</td>
+      <td>gene</td>
+      <td>16527</td>
+      <td>16596</td>
+      <td>.</td>
+      <td>-</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ENSDARG00000081475.3</td>
+      <td>ENSDART00000115546.3</td>
+      <td>ENSDARE00000882281</td>
+      <td>Mt_tRNA</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>179 rows × 18 columns</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grab all the genes, get their ids, and chop off the '.3' </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ending which indicates the version</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mito_genes <span class="op">=</span> mito_data[mito_data[<span class="st">"feature"</span>] <span class="op">==</span> <span class="st">"gene"</span>][<span class="st">"gene_id"</span>].<span class="bu">apply</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: x[:<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>mito_genes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>142    ENSDARG00000083480
+143    ENSDARG00000082753
+144    ENSDARG00000081443
+145    ENSDARG00000080337
+146    ENSDARG00000083046
+147    ENSDARG00000063895
+148    ENSDARG00000083118
+149    ENSDARG00000080630
+150    ENSDARG00000082084
+151    ENSDARG00000063899
+152    ENSDARG00000080718
+153    ENSDARG00000080401
+154    ENSDARG00000081938
+155    ENSDARG00000082789
+156    ENSDARG00000080128
+157    ENSDARG00000063905
+158    ENSDARG00000081369
+159    ENSDARG00000083519
+160    ENSDARG00000063908
+161    ENSDARG00000080151
+162    ENSDARG00000063910
+163    ENSDARG00000063911
+164    ENSDARG00000063912
+165    ENSDARG00000081758
+166    ENSDARG00000063914
+167    ENSDARG00000080329
+168    ENSDARG00000063916
+169    ENSDARG00000063917
+170    ENSDARG00000082716
+171    ENSDARG00000082123
+172    ENSDARG00000081280
+173    ENSDARG00000063921
+174    ENSDARG00000063922
+175    ENSDARG00000083312
+176    ENSDARG00000063924
+177    ENSDARG00000083462
+178    ENSDARG00000081475
+Name: gene_id, dtype: object</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mito_genes.to_csv(<span class="st">"./localdata/mito-genes.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So, uh, yeah - success!</p>
+
+
+
+</main> <!-- /main -->
+<script>
+    // Remove background
+    elements = document.querySelectorAll('[id=clean-collapse]').forEach(
+        function(element) {
+            element.classList.remove("callout-style-default");
+        }
+    )
+    
+    // Add arrow to front to signify dropdownyness
+    arrow = "▶";
+    elements = document.querySelectorAll('.callout-caption-container').forEach(
+        function(element) {
+            element.innerHTML = arrow + element.innerHTML;
+        }
+    )
+</script>
+<script src="https://giscus.app/client.js" data-repo="baileyandrew/blog" data-repo-id="R_kgDOInJwKg" data-category="Announcements" data-category-id="DIC_kwDOInJwKs4CTGOQ" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_protanopia" data-lang="en" data-loading="lazy" crossorigin="anonymous" async="">
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,13 @@
+#clean-collapse div.callout-caption-container.flex-fill {
+  color:#C0CF96;
+  font-weight:bold;
+}
+
+#clean-collapse div.callout-icon-container {
+  opacity:0%;
+}
+
+#clean-collapse div.callout-header.d-flex.align-content-center.collapsed {
+  color:#C0CF96;
+  font-weight:bold;
+}
