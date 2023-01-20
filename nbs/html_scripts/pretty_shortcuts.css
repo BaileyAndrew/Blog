@@ -34,3 +34,9 @@
     -webkit-text-stroke: 1px;
     -webkit-text-stroke-color: #EB1960;
 }
+
+.setups {
+    -webkit-text-fill-color: #EB1960;
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: #555555;
+}
