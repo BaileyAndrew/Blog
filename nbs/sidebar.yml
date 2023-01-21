@@ -6,4 +6,5 @@ website:
       - section: Puzzles
         contents:
           - 500_Puzzles/BnV.ipynb
+      - StaticPosts.ipynb
       - OtherBlogs.ipynb
