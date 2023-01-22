@@ -8,7 +8,7 @@ format:
     toc: true
 
 website:
-  title: "Bailey's Site"
+  title: "Lorem Ipsomething"
   twitter-card: true
   open-graph: true
   repo-actions: [issue]
