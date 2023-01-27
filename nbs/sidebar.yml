@@ -7,5 +7,5 @@ website:
       - section: Puzzles
         contents:
           - 500_Puzzles/BnV.ipynb
-      - Slideshowindex.ipynb
+      - SlideshowIndex.ipynb
       - OtherBlogs.ipynb
