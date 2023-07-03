@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bailey Andrew">
+<meta name="dcterms.date" content="2023-01-26">
+<meta name="description" content="Just barely not in time for ICML">
+
+<title>Lorem Ipsomething - Fixed antGLasso</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../html_scripts/collapse.css">
+<link rel="stylesheet" href="../../html_scripts/pretty_shortcuts.css">
+<meta property="og:title" content="Lorem Ipsomething - Fixed antGLasso">
+<meta property="og:description" content="Just barely not in time for ICML">
+<meta property="og:image" content="https://BaileyAndrew.github.io/Blog/000_Blog/004_scRNA/Fixed-antGLasso_files/figure-html/cell-24-output-1.png">
+<meta property="og:site-name" content="Lorem Ipsomething">
+<meta property="og:image:height" content="840">
+<meta property="og:image:width" content="840">
+<meta name="twitter:title" content="Lorem Ipsomething - Fixed antGLasso">
+<meta name="twitter:description" content="Just barely not in time for ICML">
+<meta name="twitter:image" content="https://BaileyAndrew.github.io/Blog/000_Blog/004_scRNA/Fixed-antGLasso_files/figure-html/cell-24-output-1.png">
+<meta name="twitter:image-height" content="840">
+<meta name="twitter:image-width" content="840">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lorem Ipsomething</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Fixed antGLasso</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../blog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../staticposts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Static Posts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Puzzles</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../500_Puzzles/bnv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Boulders in Valleys</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slideshowindex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slideshows</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../otherblogs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other People’s Blogs</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#utilities" id="toc-utilities" class="nav-link active" data-scroll-target="#utilities">Utilities</a></li>
+  <li><a href="#make-plot" id="toc-make-plot" class="nav-link" data-scroll-target="#make-plot">Make Plot</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BaileyAndrew/Blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Fixed antGLasso</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Work</div>
+    <div class="quarto-category">Omics</div>
+    <div class="quarto-category">Useful</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Just barely not in time for ICML
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bailey Andrew </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGLasso-improved-output.csv"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGLasso-output-raw.csv"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGLasso-output-raw-core.csv"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGLasso-output-raw-eig-core.csv"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/EiGLasso-output.csv"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/simple-ziln-estimator.csv"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/TeraLasso-output-raw.csv"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGlasso-output-iter-raws.csv"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGlasso-output-iter-zs.csv"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="87">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGlasso-output-iter-raws--.csv"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="117">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGlasso-output-iter-zs--.csv"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGlasso-output-iter-raws--fast-test.csv"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="224">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( <span class="co"># poorly named</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"./localdata/antGlasso-output-iter-zs--fast.csv"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names=</span><span class="fu">paste0</span>(<span class="st">"C"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">565</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>antGLasso.mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A matrix: 565 × 565 of type dbl</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">C1</th>
+<th data-quarto-table-cell-role="th" scope="col">C2</th>
+<th data-quarto-table-cell-role="th" scope="col">C3</th>
+<th data-quarto-table-cell-role="th" scope="col">C4</th>
+<th data-quarto-table-cell-role="th" scope="col">C5</th>
+<th data-quarto-table-cell-role="th" scope="col">C6</th>
+<th data-quarto-table-cell-role="th" scope="col">C7</th>
+<th data-quarto-table-cell-role="th" scope="col">C8</th>
+<th data-quarto-table-cell-role="th" scope="col">C9</th>
+<th data-quarto-table-cell-role="th" scope="col">C10</th>
+<th data-quarto-table-cell-role="th" scope="col">⋯</th>
+<th data-quarto-table-cell-role="th" scope="col">C556</th>
+<th data-quarto-table-cell-role="th" scope="col">C557</th>
+<th data-quarto-table-cell-role="th" scope="col">C558</th>
+<th data-quarto-table-cell-role="th" scope="col">C559</th>
+<th data-quarto-table-cell-role="th" scope="col">C560</th>
+<th data-quarto-table-cell-role="th" scope="col">C561</th>
+<th data-quarto-table-cell-role="th" scope="col">C562</th>
+<th data-quarto-table-cell-role="th" scope="col">C563</th>
+<th data-quarto-table-cell-role="th" scope="col">C564</th>
+<th data-quarto-table-cell-role="th" scope="col">C565</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NaN</td>
+<td>3.046111e+12</td>
+<td>6.868032e+12</td>
+<td>-4.240036e+13</td>
+<td>-1.128632e+12</td>
+<td>-3.538811e+13</td>
+<td>-9.247790e+12</td>
+<td>-5.732030e+13</td>
+<td>5.475978e+13</td>
+<td>-1.400414e+12</td>
+<td>⋯</td>
+<td>-5.269030e+13</td>
+<td>-5.197277e+13</td>
+<td>8.459680e+13</td>
+<td>4.927410e+13</td>
+<td>-1.982368e+13</td>
+<td>3.220046e+13</td>
+<td>-6.327815e+12</td>
+<td>4.933892e+12</td>
+<td>-3.084243e+13</td>
+<td>1.723723e+13</td>
+</tr>
+<tr class="even">
+<td>3.046111e+12</td>
+<td>NaN</td>
+<td>3.777548e+13</td>
+<td>-1.634980e+13</td>
+<td>-9.392231e+13</td>
+<td>-1.950804e+13</td>
+<td>2.912329e+13</td>
+<td>-2.590812e+13</td>
+<td>-9.319202e+13</td>
+<td>-1.696134e+13</td>
+<td>⋯</td>
+<td>4.350502e+13</td>
+<td>1.038066e+12</td>
+<td>-5.751836e+13</td>
+<td>-8.019741e+13</td>
+<td>-4.606992e+13</td>
+<td>-1.443169e+12</td>
+<td>-2.169960e+13</td>
+<td>2.603163e+13</td>
+<td>-1.556636e+13</td>
+<td>2.156171e+13</td>
+</tr>
+<tr class="odd">
+<td>6.868032e+12</td>
+<td>3.777548e+13</td>
+<td>NaN</td>
+<td>6.942125e+13</td>
+<td>2.267935e+13</td>
+<td>-1.321801e+14</td>
+<td>4.766873e+13</td>
+<td>-8.204984e+13</td>
+<td>1.879247e+13</td>
+<td>9.747860e+13</td>
+<td>⋯</td>
+<td>1.988749e+13</td>
+<td>5.486699e+13</td>
+<td>2.342382e+14</td>
+<td>4.101605e+13</td>
+<td>-9.453522e+13</td>
+<td>-1.102471e+13</td>
+<td>-1.166797e+14</td>
+<td>1.015711e+13</td>
+<td>9.367715e+13</td>
+<td>5.964154e+12</td>
+</tr>
+<tr class="even">
+<td>-4.240036e+13</td>
+<td>-1.634980e+13</td>
+<td>6.942125e+13</td>
+<td>NaN</td>
+<td>-2.875672e+13</td>
+<td>-2.762031e+13</td>
+<td>7.240927e+12</td>
+<td>7.629501e+13</td>
+<td>4.129779e+13</td>
+<td>-1.351269e+13</td>
+<td>⋯</td>
+<td>-5.256736e+13</td>
+<td>1.922705e+14</td>
+<td>-1.092102e+14</td>
+<td>8.896426e+13</td>
+<td>-5.083836e+13</td>
+<td>2.966707e+13</td>
+<td>1.030309e+13</td>
+<td>-4.616620e+13</td>
+<td>-4.631240e+13</td>
+<td>5.612400e+13</td>
+</tr>
+<tr class="odd">
+<td>-1.128632e+12</td>
+<td>-9.392231e+13</td>
+<td>2.267935e+13</td>
+<td>-2.875672e+13</td>
+<td>NaN</td>
+<td>-1.308110e+13</td>
+<td>3.501994e+13</td>
+<td>-3.208606e+13</td>
+<td>1.476700e+14</td>
+<td>-5.703544e+13</td>
+<td>⋯</td>
+<td>-3.909076e+13</td>
+<td>7.368996e+13</td>
+<td>-1.576158e+13</td>
+<td>-1.126358e+14</td>
+<td>2.838176e+13</td>
+<td>-5.266484e+13</td>
+<td>-4.596979e+12</td>
+<td>3.558934e+13</td>
+<td>7.790246e+12</td>
+<td>-1.669013e+13</td>
+</tr>
+<tr class="even">
+<td>-3.538811e+13</td>
+<td>-1.950804e+13</td>
+<td>-1.321801e+14</td>
+<td>-2.762031e+13</td>
+<td>-1.308110e+13</td>
+<td>NaN</td>
+<td>-1.140383e+13</td>
+<td>-1.226783e+13</td>
+<td>-7.976637e+13</td>
+<td>5.934673e+13</td>
+<td>⋯</td>
+<td>-7.830792e+13</td>
+<td>-7.093454e+12</td>
+<td>-1.249688e+14</td>
+<td>-6.842659e+13</td>
+<td>3.944382e+13</td>
+<td>6.068348e+11</td>
+<td>1.504867e+13</td>
+<td>-1.549665e+13</td>
+<td>-6.540498e+11</td>
+<td>-1.783056e+13</td>
+</tr>
+<tr class="odd">
+<td>-9.247790e+12</td>
+<td>2.912329e+13</td>
+<td>4.766873e+13</td>
+<td>7.240927e+12</td>
+<td>3.501994e+13</td>
+<td>-1.140383e+13</td>
+<td>NaN</td>
+<td>7.978692e+13</td>
+<td>-2.605810e+13</td>
+<td>4.272497e+13</td>
+<td>⋯</td>
+<td>3.451650e+13</td>
+<td>4.312987e+13</td>
+<td>9.654302e+12</td>
+<td>-9.227944e+13</td>
+<td>2.270829e+13</td>
+<td>-5.221622e+13</td>
+<td>-3.022689e+13</td>
+<td>-2.219493e+13</td>
+<td>-4.404369e+13</td>
+<td>4.356799e+13</td>
+</tr>
+<tr class="even">
+<td>-5.732030e+13</td>
+<td>-2.590812e+13</td>
+<td>-8.204984e+13</td>
+<td>7.629501e+13</td>
+<td>-3.208606e+13</td>
+<td>-1.226783e+13</td>
+<td>7.978692e+13</td>
+<td>NaN</td>
+<td>-6.102545e+13</td>
+<td>7.879847e+13</td>
+<td>⋯</td>
+<td>-4.279726e+13</td>
+<td>3.396175e+13</td>
+<td>-1.825610e+13</td>
+<td>-6.732116e+13</td>
+<td>-2.608072e+12</td>
+<td>9.710175e+13</td>
+<td>2.516091e+13</td>
+<td>1.335878e+13</td>
+<td>6.200788e+13</td>
+<td>-4.761254e+12</td>
+</tr>
+<tr class="odd">
+<td>5.475978e+13</td>
+<td>-9.319202e+13</td>
+<td>1.879247e+13</td>
+<td>4.129779e+13</td>
+<td>1.476700e+14</td>
+<td>-7.976637e+13</td>
+<td>-2.605810e+13</td>
+<td>-6.102545e+13</td>
+<td>NaN</td>
+<td>-4.112483e+13</td>
+<td>⋯</td>
+<td>5.077414e+12</td>
+<td>7.624793e+13</td>
+<td>2.384032e+13</td>
+<td>1.598502e+14</td>
+<td>2.339826e+13</td>
+<td>4.426618e+13</td>
+<td>-5.911408e+13</td>
+<td>1.243582e+13</td>
+<td>4.979113e+13</td>
+<td>-1.769005e+13</td>
+</tr>
+<tr class="even">
+<td>-1.400414e+12</td>
+<td>-1.696134e+13</td>
+<td>9.747860e+13</td>
+<td>-1.351269e+13</td>
+<td>-5.703544e+13</td>
+<td>5.934673e+13</td>
+<td>4.272497e+13</td>
+<td>7.879847e+13</td>
+<td>-4.112483e+13</td>
+<td>NaN</td>
+<td>⋯</td>
+<td>-1.015483e+13</td>
+<td>4.575635e+13</td>
+<td>-1.799156e+14</td>
+<td>1.279291e+14</td>
+<td>-6.669664e+12</td>
+<td>-3.090588e+13</td>
+<td>-1.646823e+13</td>
+<td>-5.989637e+13</td>
+<td>9.497850e+13</td>
+<td>3.436922e+13</td>
+</tr>
+<tr class="odd">
+<td>-5.112523e+13</td>
+<td>3.003465e+12</td>
+<td>-1.112047e+14</td>
+<td>-3.448346e+13</td>
+<td>-3.041252e+13</td>
+<td>-2.344427e+13</td>
+<td>7.689195e+13</td>
+<td>-1.150035e+13</td>
+<td>4.035811e+13</td>
+<td>-8.150457e+13</td>
+<td>⋯</td>
+<td>-1.013528e+14</td>
+<td>1.406081e+14</td>
+<td>-1.132039e+14</td>
+<td>5.357348e+13</td>
+<td>-1.843953e+14</td>
+<td>6.627681e+13</td>
+<td>-8.858870e+13</td>
+<td>-1.122675e+14</td>
+<td>2.874339e+13</td>
+<td>-4.051927e+13</td>
+</tr>
+<tr class="even">
+<td>-1.629952e+13</td>
+<td>8.543525e+13</td>
+<td>-8.453267e+13</td>
+<td>-3.941399e+13</td>
+<td>5.748388e+13</td>
+<td>-4.103579e+13</td>
+<td>-3.171031e+13</td>
+<td>1.202686e+13</td>
+<td>-9.138287e+12</td>
+<td>-1.477617e+13</td>
+<td>⋯</td>
+<td>5.894118e+13</td>
+<td>-7.546291e+13</td>
+<td>-2.223327e+13</td>
+<td>3.701574e+13</td>
+<td>6.059062e+12</td>
+<td>1.108861e+13</td>
+<td>-2.236924e+13</td>
+<td>1.355453e+14</td>
+<td>1.092853e+13</td>
+<td>9.995923e+12</td>
+</tr>
+<tr class="odd">
+<td>-5.621433e+13</td>
+<td>2.318302e+13</td>
+<td>6.898538e+13</td>
+<td>-1.252698e+14</td>
+<td>-5.133793e+13</td>
+<td>1.337862e+14</td>
+<td>9.123603e+12</td>
+<td>2.647063e+12</td>
+<td>3.936406e+13</td>
+<td>1.254510e+12</td>
+<td>⋯</td>
+<td>-2.025052e+13</td>
+<td>-5.402396e+13</td>
+<td>-3.795739e+13</td>
+<td>8.826468e+13</td>
+<td>-3.834434e+13</td>
+<td>2.498227e+13</td>
+<td>-1.130027e+13</td>
+<td>-7.556991e+12</td>
+<td>-1.092842e+13</td>
+<td>1.758189e+13</td>
+</tr>
+<tr class="even">
+<td>3.875492e+12</td>
+<td>2.479136e+13</td>
+<td>1.587442e+14</td>
+<td>-3.914420e+13</td>
+<td>5.430582e+11</td>
+<td>6.956589e+12</td>
+<td>3.809615e+12</td>
+<td>5.942233e+13</td>
+<td>5.086046e+13</td>
+<td>8.067386e+13</td>
+<td>⋯</td>
+<td>1.178135e+13</td>
+<td>7.437042e+13</td>
+<td>1.075051e+14</td>
+<td>2.005278e+13</td>
+<td>5.076728e+12</td>
+<td>4.806837e+13</td>
+<td>-6.794184e+12</td>
+<td>1.275946e+13</td>
+<td>9.772492e+12</td>
+<td>-1.461312e+13</td>
+</tr>
+<tr class="odd">
+<td>3.158417e+13</td>
+<td>-2.294375e+13</td>
+<td>-6.258372e+13</td>
+<td>-1.402279e+14</td>
+<td>1.452978e+13</td>
+<td>5.550000e+12</td>
+<td>-5.790259e+12</td>
+<td>-1.954577e+13</td>
+<td>3.325392e+12</td>
+<td>2.075633e+13</td>
+<td>⋯</td>
+<td>-1.516158e+13</td>
+<td>-5.941670e+11</td>
+<td>-2.531358e+13</td>
+<td>3.431872e+13</td>
+<td>-4.193525e+13</td>
+<td>1.065314e+14</td>
+<td>2.073660e+12</td>
+<td>1.793192e+13</td>
+<td>3.253184e+13</td>
+<td>-4.643595e+13</td>
+</tr>
+<tr class="even">
+<td>3.539946e+12</td>
+<td>-3.431644e+13</td>
+<td>2.796264e+13</td>
+<td>5.460183e+13</td>
+<td>4.888516e+13</td>
+<td>-3.803297e+13</td>
+<td>1.519503e+14</td>
+<td>8.717137e+13</td>
+<td>-2.260274e+13</td>
+<td>1.340251e+13</td>
+<td>⋯</td>
+<td>-2.219630e+13</td>
+<td>6.945274e+13</td>
+<td>-6.210361e+13</td>
+<td>3.709610e+13</td>
+<td>9.259080e+11</td>
+<td>-3.070383e+13</td>
+<td>1.139817e+13</td>
+<td>-1.379628e+13</td>
+<td>1.951735e+13</td>
+<td>1.833552e+13</td>
+</tr>
+<tr class="odd">
+<td>-5.422540e+13</td>
+<td>2.395957e+13</td>
+<td>-2.086584e+13</td>
+<td>2.671103e+13</td>
+<td>-1.979525e+13</td>
+<td>-1.041731e+11</td>
+<td>-3.200195e+13</td>
+<td>-7.671162e+13</td>
+<td>-1.818501e+13</td>
+<td>-3.514802e+13</td>
+<td>⋯</td>
+<td>-5.812386e+13</td>
+<td>-1.051153e+13</td>
+<td>-7.368859e+13</td>
+<td>-9.612443e+13</td>
+<td>1.868359e+12</td>
+<td>-4.952838e+13</td>
+<td>2.472575e+13</td>
+<td>9.366602e+12</td>
+<td>5.161290e+12</td>
+<td>1.758288e+12</td>
+</tr>
+<tr class="even">
+<td>3.957180e+13</td>
+<td>-1.009939e+13</td>
+<td>-3.923401e+13</td>
+<td>5.700367e+13</td>
+<td>-3.628039e+13</td>
+<td>3.377306e+13</td>
+<td>-5.245303e+13</td>
+<td>-7.757813e+13</td>
+<td>4.771726e+13</td>
+<td>8.565091e+13</td>
+<td>⋯</td>
+<td>3.144463e+13</td>
+<td>-4.815889e+13</td>
+<td>-1.047906e+14</td>
+<td>-1.292962e+14</td>
+<td>2.891112e+12</td>
+<td>-1.077979e+13</td>
+<td>-1.709015e+13</td>
+<td>2.983651e+12</td>
+<td>2.716423e+13</td>
+<td>6.638164e+13</td>
+</tr>
+<tr class="odd">
+<td>-6.256081e+13</td>
+<td>2.586244e+13</td>
+<td>7.135749e+13</td>
+<td>4.967438e+13</td>
+<td>4.786557e+13</td>
+<td>-4.349456e+13</td>
+<td>3.958708e+13</td>
+<td>-3.216799e+13</td>
+<td>-8.314536e+13</td>
+<td>-5.542861e+13</td>
+<td>⋯</td>
+<td>-6.901389e+13</td>
+<td>9.943862e+13</td>
+<td>9.778996e+13</td>
+<td>1.602621e+14</td>
+<td>-3.171261e+13</td>
+<td>8.795402e+13</td>
+<td>5.488641e+13</td>
+<td>5.256447e+13</td>
+<td>6.332399e+13</td>
+<td>5.353285e+13</td>
+</tr>
+<tr class="even">
+<td>1.284388e+14</td>
+<td>-1.326845e+13</td>
+<td>9.888515e+13</td>
+<td>-1.124916e+14</td>
+<td>-1.848110e+13</td>
+<td>-1.085803e+14</td>
+<td>-4.931784e+13</td>
+<td>-1.058963e+13</td>
+<td>-1.114829e+13</td>
+<td>9.187097e+13</td>
+<td>⋯</td>
+<td>-1.277520e+14</td>
+<td>5.196008e+13</td>
+<td>1.399297e+14</td>
+<td>3.991710e+13</td>
+<td>3.928509e+13</td>
+<td>-6.324168e+13</td>
+<td>1.266383e+13</td>
+<td>8.198419e+13</td>
+<td>1.350083e+13</td>
+<td>-1.209528e+14</td>
+</tr>
+<tr class="odd">
+<td>1.426105e+14</td>
+<td>8.318527e+13</td>
+<td>-1.105768e+14</td>
+<td>1.079410e+14</td>
+<td>-1.362254e+14</td>
+<td>6.556325e+13</td>
+<td>6.094645e+13</td>
+<td>-2.074949e+11</td>
+<td>-1.333559e+14</td>
+<td>-7.042604e+13</td>
+<td>⋯</td>
+<td>6.198757e+13</td>
+<td>-7.284209e+13</td>
+<td>1.204136e+14</td>
+<td>1.613869e+14</td>
+<td>6.524741e+13</td>
+<td>2.702321e+13</td>
+<td>-4.021986e+13</td>
+<td>-5.556755e+13</td>
+<td>-4.081723e+13</td>
+<td>4.786614e+13</td>
+</tr>
+<tr class="even">
+<td>-8.691874e+13</td>
+<td>8.344652e+12</td>
+<td>-9.785369e+12</td>
+<td>1.626440e+13</td>
+<td>-6.004035e+13</td>
+<td>-6.935820e+13</td>
+<td>8.139934e+13</td>
+<td>-5.011842e+13</td>
+<td>4.312353e+13</td>
+<td>1.357640e+13</td>
+<td>⋯</td>
+<td>-1.041233e+12</td>
+<td>7.258505e+13</td>
+<td>-8.270377e+13</td>
+<td>1.368568e+14</td>
+<td>3.900714e+12</td>
+<td>6.647444e+13</td>
+<td>-5.281249e+13</td>
+<td>-5.394355e+13</td>
+<td>-4.501446e+13</td>
+<td>-4.002922e+13</td>
+</tr>
+<tr class="odd">
+<td>1.632837e+13</td>
+<td>-4.585292e+13</td>
+<td>-4.241630e+13</td>
+<td>-4.102448e+13</td>
+<td>7.695757e+13</td>
+<td>-8.889571e+13</td>
+<td>-5.689023e+13</td>
+<td>7.207166e+12</td>
+<td>3.358776e+13</td>
+<td>1.866135e+14</td>
+<td>⋯</td>
+<td>4.008920e+13</td>
+<td>1.900338e+13</td>
+<td>1.999709e+13</td>
+<td>-8.005929e+13</td>
+<td>-3.088304e+13</td>
+<td>-4.833974e+13</td>
+<td>6.754450e+12</td>
+<td>7.615616e+12</td>
+<td>-1.082702e+13</td>
+<td>1.878218e+12</td>
+</tr>
+<tr class="even">
+<td>4.093220e+12</td>
+<td>-1.017236e+12</td>
+<td>-1.501410e+14</td>
+<td>1.610945e+13</td>
+<td>5.781251e+12</td>
+<td>-5.213574e+11</td>
+<td>-9.865235e+13</td>
+<td>2.975687e+13</td>
+<td>-1.539967e+13</td>
+<td>4.260791e+13</td>
+<td>⋯</td>
+<td>-6.949317e+12</td>
+<td>-1.750084e+13</td>
+<td>-9.249619e+13</td>
+<td>9.665272e+13</td>
+<td>2.552172e+13</td>
+<td>4.180800e+13</td>
+<td>-1.131329e+13</td>
+<td>-4.329918e+10</td>
+<td>7.802729e+12</td>
+<td>1.908227e+13</td>
+</tr>
+<tr class="odd">
+<td>5.143491e+13</td>
+<td>7.932306e+12</td>
+<td>6.897621e+13</td>
+<td>1.610690e+13</td>
+<td>1.599501e+13</td>
+<td>-1.802578e+13</td>
+<td>3.873941e+13</td>
+<td>1.069002e+14</td>
+<td>4.528330e+13</td>
+<td>-5.040170e+13</td>
+<td>⋯</td>
+<td>-6.382362e+13</td>
+<td>-3.580678e+13</td>
+<td>3.230063e+13</td>
+<td>-3.452560e+13</td>
+<td>1.280074e+13</td>
+<td>-1.556045e+12</td>
+<td>-3.267624e+13</td>
+<td>-5.245811e+12</td>
+<td>4.914300e+12</td>
+<td>2.619620e+13</td>
+</tr>
+<tr class="even">
+<td>-2.049368e+13</td>
+<td>-5.365664e+12</td>
+<td>2.562809e+12</td>
+<td>4.544527e+13</td>
+<td>-5.955280e+13</td>
+<td>9.436424e+12</td>
+<td>6.382369e+11</td>
+<td>-4.409155e+13</td>
+<td>-7.563815e+13</td>
+<td>-2.178398e+13</td>
+<td>⋯</td>
+<td>-4.675275e+13</td>
+<td>-2.827118e+13</td>
+<td>-1.794533e+13</td>
+<td>-4.139820e+13</td>
+<td>6.195035e+13</td>
+<td>1.082961e+14</td>
+<td>3.074573e+13</td>
+<td>-2.489751e+11</td>
+<td>-5.077680e+11</td>
+<td>-1.581547e+13</td>
+</tr>
+<tr class="odd">
+<td>-1.512109e+12</td>
+<td>4.004708e+13</td>
+<td>-4.289864e+13</td>
+<td>7.383490e+13</td>
+<td>-7.603973e+12</td>
+<td>-3.608521e+13</td>
+<td>7.809274e+13</td>
+<td>-1.092659e+13</td>
+<td>-4.279960e+13</td>
+<td>5.189162e+13</td>
+<td>⋯</td>
+<td>-2.349551e+13</td>
+<td>3.323677e+12</td>
+<td>1.467562e+14</td>
+<td>7.792455e+13</td>
+<td>-2.416961e+13</td>
+<td>9.016768e+12</td>
+<td>2.878969e+13</td>
+<td>-1.236269e+12</td>
+<td>1.604028e+13</td>
+<td>2.068124e+13</td>
+</tr>
+<tr class="even">
+<td>-3.564691e+13</td>
+<td>3.107635e+13</td>
+<td>-6.061874e+13</td>
+<td>-7.209576e+13</td>
+<td>1.050708e+13</td>
+<td>1.681035e+13</td>
+<td>1.596013e+13</td>
+<td>-2.488929e+13</td>
+<td>-3.430741e+13</td>
+<td>6.526176e+13</td>
+<td>⋯</td>
+<td>-4.590267e+13</td>
+<td>-8.266349e+13</td>
+<td>8.678623e+13</td>
+<td>5.457035e+13</td>
+<td>-2.207560e+13</td>
+<td>-6.093532e+12</td>
+<td>-2.802643e+12</td>
+<td>9.282697e+12</td>
+<td>-2.656124e+13</td>
+<td>-1.655210e+13</td>
+</tr>
+<tr class="odd">
+<td>8.186550e+11</td>
+<td>3.341303e+12</td>
+<td>3.508095e+13</td>
+<td>-4.770865e+12</td>
+<td>1.013540e+13</td>
+<td>-3.516717e+13</td>
+<td>-4.219997e+13</td>
+<td>-5.522424e+13</td>
+<td>1.712080e+14</td>
+<td>-1.769005e+13</td>
+<td>⋯</td>
+<td>-8.249807e+12</td>
+<td>-1.158721e+12</td>
+<td>-6.063565e+12</td>
+<td>-2.487188e+13</td>
+<td>-1.255108e+13</td>
+<td>4.325454e+13</td>
+<td>1.423005e+13</td>
+<td>-4.139299e+13</td>
+<td>3.897155e+13</td>
+<td>-1.012783e+13</td>
+</tr>
+<tr class="even">
+<td>1.675782e+13</td>
+<td>2.179668e+13</td>
+<td>1.143838e+14</td>
+<td>1.612898e+13</td>
+<td>3.930609e+13</td>
+<td>1.646216e+13</td>
+<td>-4.133486e+13</td>
+<td>6.720922e+13</td>
+<td>-5.355268e+13</td>
+<td>-1.118784e+14</td>
+<td>⋯</td>
+<td>1.880037e+13</td>
+<td>5.364130e+13</td>
+<td>-1.140941e+14</td>
+<td>-6.496438e+13</td>
+<td>1.371621e+13</td>
+<td>-2.081371e+13</td>
+<td>-2.301832e+13</td>
+<td>2.503404e+13</td>
+<td>3.239165e+13</td>
+<td>-2.726229e+13</td>
+</tr>
+<tr class="odd">
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋱</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+</tr>
+<tr class="even">
+<td>-4.798197e+13</td>
+<td>2.680444e+12</td>
+<td>6.446276e+13</td>
+<td>-7.529194e+13</td>
+<td>5.626399e+13</td>
+<td>-8.782540e+11</td>
+<td>8.229682e+13</td>
+<td>1.181334e+14</td>
+<td>-7.688662e+13</td>
+<td>3.414897e+13</td>
+<td>⋯</td>
+<td>-2.571158e+13</td>
+<td>-1.911257e+14</td>
+<td>9.385912e+12</td>
+<td>-2.465900e+12</td>
+<td>-5.837704e+13</td>
+<td>-9.455955e+12</td>
+<td>-8.132076e+12</td>
+<td>9.102270e+12</td>
+<td>1.176717e+13</td>
+<td>2.757988e+13</td>
+</tr>
+<tr class="odd">
+<td>4.296843e+12</td>
+<td>4.392290e+12</td>
+<td>-1.360119e+14</td>
+<td>5.107922e+13</td>
+<td>-5.496998e+13</td>
+<td>-3.125020e+13</td>
+<td>-2.585875e+13</td>
+<td>7.830522e+10</td>
+<td>-4.761371e+13</td>
+<td>-6.740268e+13</td>
+<td>⋯</td>
+<td>-4.803216e+13</td>
+<td>-1.286762e+14</td>
+<td>-6.199423e+13</td>
+<td>1.066467e+14</td>
+<td>1.139020e+14</td>
+<td>-4.532723e+13</td>
+<td>-6.449819e+13</td>
+<td>3.400670e+13</td>
+<td>-4.979049e+13</td>
+<td>-8.239383e+13</td>
+</tr>
+<tr class="even">
+<td>2.477508e+13</td>
+<td>-3.110751e+12</td>
+<td>-2.501786e+13</td>
+<td>1.113812e+14</td>
+<td>1.472056e+13</td>
+<td>-6.473631e+13</td>
+<td>4.228683e+13</td>
+<td>-6.085502e+12</td>
+<td>-3.989740e+13</td>
+<td>6.425668e+13</td>
+<td>⋯</td>
+<td>-6.866864e+13</td>
+<td>9.681253e+13</td>
+<td>-1.740139e+14</td>
+<td>7.885324e+12</td>
+<td>2.369331e+13</td>
+<td>4.887876e+11</td>
+<td>-1.141134e+14</td>
+<td>9.538528e+13</td>
+<td>-5.670022e+13</td>
+<td>-1.143804e+14</td>
+</tr>
+<tr class="odd">
+<td>1.975771e+13</td>
+<td>9.029127e+11</td>
+<td>-3.066579e+13</td>
+<td>-8.177572e+12</td>
+<td>4.163817e+13</td>
+<td>-4.343660e+13</td>
+<td>-3.842072e+13</td>
+<td>-4.046325e+13</td>
+<td>-3.314798e+13</td>
+<td>-1.436970e+14</td>
+<td>⋯</td>
+<td>-1.874347e+13</td>
+<td>2.681771e+13</td>
+<td>8.271368e+13</td>
+<td>-1.417972e+13</td>
+<td>-8.502989e+13</td>
+<td>-3.288421e+13</td>
+<td>-3.811315e+13</td>
+<td>-2.180306e+13</td>
+<td>4.498194e+13</td>
+<td>6.496115e+13</td>
+</tr>
+<tr class="even">
+<td>-2.316842e+13</td>
+<td>-2.891480e+13</td>
+<td>1.357435e+14</td>
+<td>-3.518190e+13</td>
+<td>-8.497403e+13</td>
+<td>9.403986e+12</td>
+<td>1.155640e+13</td>
+<td>-8.521893e+13</td>
+<td>-2.814598e+13</td>
+<td>9.059394e+13</td>
+<td>⋯</td>
+<td>-3.970412e+13</td>
+<td>-1.128163e+14</td>
+<td>8.234665e+13</td>
+<td>-1.422604e+13</td>
+<td>7.040936e+13</td>
+<td>3.669417e+13</td>
+<td>4.854412e+13</td>
+<td>-3.595056e+12</td>
+<td>-2.313373e+13</td>
+<td>-2.632115e+13</td>
+</tr>
+<tr class="odd">
+<td>-1.906594e+13</td>
+<td>-7.541681e+13</td>
+<td>-4.386826e+13</td>
+<td>-5.066807e+13</td>
+<td>-6.692188e+13</td>
+<td>5.988982e+12</td>
+<td>-5.150589e+13</td>
+<td>5.132211e+13</td>
+<td>-3.734088e+13</td>
+<td>-1.009811e+14</td>
+<td>⋯</td>
+<td>1.837847e+13</td>
+<td>-4.836465e+13</td>
+<td>-5.318742e+13</td>
+<td>-5.143554e+13</td>
+<td>1.935059e+13</td>
+<td>-1.164362e+13</td>
+<td>-2.441480e+13</td>
+<td>4.922503e+13</td>
+<td>-7.719427e+12</td>
+<td>-8.514601e+13</td>
+</tr>
+<tr class="even">
+<td>-3.158045e+13</td>
+<td>-4.070509e+13</td>
+<td>7.548942e+13</td>
+<td>5.024568e+13</td>
+<td>1.278804e+13</td>
+<td>-1.531804e+13</td>
+<td>-4.404408e+13</td>
+<td>8.408680e+12</td>
+<td>-2.463821e+13</td>
+<td>-8.368681e+13</td>
+<td>⋯</td>
+<td>2.228227e+13</td>
+<td>-3.792645e+13</td>
+<td>-6.308650e+13</td>
+<td>-2.593971e+13</td>
+<td>-2.780974e+13</td>
+<td>-3.495727e+13</td>
+<td>-6.458881e+12</td>
+<td>-3.843550e+13</td>
+<td>2.501416e+13</td>
+<td>1.390450e+13</td>
+</tr>
+<tr class="odd">
+<td>2.056631e+12</td>
+<td>2.017948e+13</td>
+<td>8.776188e+13</td>
+<td>-1.286309e+14</td>
+<td>-6.196525e+12</td>
+<td>4.001214e+12</td>
+<td>-8.417495e+13</td>
+<td>4.256560e+13</td>
+<td>-6.130729e+13</td>
+<td>-2.937162e+13</td>
+<td>⋯</td>
+<td>3.043374e+13</td>
+<td>6.840184e+13</td>
+<td>-7.233587e+13</td>
+<td>-3.397427e+13</td>
+<td>-1.911328e+14</td>
+<td>-6.296980e+13</td>
+<td>-1.787982e+13</td>
+<td>-7.242759e+13</td>
+<td>4.007750e+13</td>
+<td>1.910105e+14</td>
+</tr>
+<tr class="even">
+<td>5.804937e+13</td>
+<td>-1.207672e+14</td>
+<td>1.621427e+14</td>
+<td>-1.255080e+14</td>
+<td>-1.960147e+14</td>
+<td>-5.174903e+13</td>
+<td>-1.720996e+14</td>
+<td>-2.500433e+13</td>
+<td>1.330524e+14</td>
+<td>1.550472e+14</td>
+<td>⋯</td>
+<td>-1.223548e+14</td>
+<td>9.963337e+13</td>
+<td>-7.403596e+12</td>
+<td>6.837375e+12</td>
+<td>-2.150206e+13</td>
+<td>-5.914236e+13</td>
+<td>-1.917747e+13</td>
+<td>-1.231994e+14</td>
+<td>-4.214192e+13</td>
+<td>-1.702969e+13</td>
+</tr>
+<tr class="odd">
+<td>-1.379513e+14</td>
+<td>8.187956e+12</td>
+<td>-6.268104e+13</td>
+<td>4.860713e+13</td>
+<td>3.186722e+13</td>
+<td>2.175826e+13</td>
+<td>2.393829e+14</td>
+<td>-2.426252e+13</td>
+<td>-2.797014e+13</td>
+<td>1.087542e+14</td>
+<td>⋯</td>
+<td>-1.419533e+14</td>
+<td>8.157764e+13</td>
+<td>-2.084572e+13</td>
+<td>4.003807e+13</td>
+<td>4.488461e+13</td>
+<td>-9.686700e+12</td>
+<td>-1.640068e+14</td>
+<td>-4.916305e+13</td>
+<td>2.438470e+13</td>
+<td>5.128925e+13</td>
+</tr>
+<tr class="even">
+<td>4.308953e+13</td>
+<td>-1.882773e+13</td>
+<td>6.030261e+13</td>
+<td>2.012798e+13</td>
+<td>-9.912061e+13</td>
+<td>-2.488993e+13</td>
+<td>7.351960e+13</td>
+<td>-7.920448e+13</td>
+<td>1.457305e+14</td>
+<td>1.214493e+14</td>
+<td>⋯</td>
+<td>-1.684837e+14</td>
+<td>1.730149e+14</td>
+<td>1.008050e+14</td>
+<td>-1.234228e+14</td>
+<td>3.053647e+13</td>
+<td>4.517061e+13</td>
+<td>-6.268059e+13</td>
+<td>-2.450610e+13</td>
+<td>1.544085e+13</td>
+<td>7.211119e+13</td>
+</tr>
+<tr class="odd">
+<td>6.111595e+13</td>
+<td>4.142242e+12</td>
+<td>5.378982e+13</td>
+<td>2.159860e+13</td>
+<td>-9.238312e+11</td>
+<td>9.117554e+13</td>
+<td>9.169179e+13</td>
+<td>6.770691e+13</td>
+<td>-2.797729e+13</td>
+<td>-4.873356e+12</td>
+<td>⋯</td>
+<td>-4.537456e+12</td>
+<td>-2.609020e+12</td>
+<td>2.677470e+13</td>
+<td>6.616598e+11</td>
+<td>2.797091e+13</td>
+<td>6.948148e+13</td>
+<td>-2.862239e+13</td>
+<td>2.519578e+13</td>
+<td>-5.743702e+13</td>
+<td>-6.902043e+13</td>
+</tr>
+<tr class="even">
+<td>1.500658e+11</td>
+<td>1.181863e+14</td>
+<td>4.903746e+13</td>
+<td>-1.073788e+14</td>
+<td>-5.012994e+13</td>
+<td>-4.250533e+13</td>
+<td>1.736946e+13</td>
+<td>-1.077158e+14</td>
+<td>4.222600e+13</td>
+<td>3.512479e+13</td>
+<td>⋯</td>
+<td>-2.284023e+13</td>
+<td>-9.899934e+13</td>
+<td>-1.791440e+13</td>
+<td>2.037515e+13</td>
+<td>-9.511187e+13</td>
+<td>1.218571e+14</td>
+<td>3.209462e+13</td>
+<td>-4.792828e+13</td>
+<td>6.373406e+13</td>
+<td>-8.868530e+12</td>
+</tr>
+<tr class="odd">
+<td>-1.489560e+13</td>
+<td>1.643831e+13</td>
+<td>1.103635e+14</td>
+<td>1.115701e+14</td>
+<td>-2.121422e+13</td>
+<td>-4.407405e+13</td>
+<td>3.573043e+13</td>
+<td>-4.988403e+13</td>
+<td>3.803867e+13</td>
+<td>3.328286e+13</td>
+<td>⋯</td>
+<td>1.278598e+13</td>
+<td>4.466079e+13</td>
+<td>-1.029932e+14</td>
+<td>6.400252e+12</td>
+<td>-2.667531e+13</td>
+<td>5.448263e+12</td>
+<td>-6.849366e+12</td>
+<td>6.833679e+12</td>
+<td>-8.059794e+12</td>
+<td>5.403069e+13</td>
+</tr>
+<tr class="even">
+<td>-1.113684e+13</td>
+<td>-4.452146e+12</td>
+<td>-2.727148e+13</td>
+<td>5.185191e+13</td>
+<td>5.999499e+12</td>
+<td>-2.890554e+12</td>
+<td>-9.277169e+13</td>
+<td>-4.950922e+12</td>
+<td>-5.754122e+13</td>
+<td>3.376960e+13</td>
+<td>⋯</td>
+<td>-5.775201e+12</td>
+<td>-1.255483e+14</td>
+<td>-1.222759e+14</td>
+<td>3.387127e+13</td>
+<td>2.991622e+12</td>
+<td>-4.789883e+12</td>
+<td>1.244837e+13</td>
+<td>1.022755e+13</td>
+<td>1.619451e+13</td>
+<td>-3.307392e+12</td>
+</tr>
+<tr class="odd">
+<td>2.886366e+13</td>
+<td>-9.276013e+12</td>
+<td>3.486812e+13</td>
+<td>-9.501544e+13</td>
+<td>7.287118e+12</td>
+<td>6.996410e+12</td>
+<td>6.077415e+13</td>
+<td>1.820570e+13</td>
+<td>3.835686e+13</td>
+<td>-4.990281e+13</td>
+<td>⋯</td>
+<td>-4.947041e+13</td>
+<td>-2.083247e+13</td>
+<td>-4.699722e+12</td>
+<td>6.550171e+13</td>
+<td>1.477557e+12</td>
+<td>-2.706348e+13</td>
+<td>3.308593e+13</td>
+<td>-3.620367e+13</td>
+<td>3.053474e+13</td>
+<td>-3.657561e+12</td>
+</tr>
+<tr class="even">
+<td>-6.098585e+12</td>
+<td>9.732112e+12</td>
+<td>2.181316e+13</td>
+<td>-2.209691e+13</td>
+<td>1.712841e+13</td>
+<td>2.251757e+13</td>
+<td>-6.910939e+13</td>
+<td>3.331503e+12</td>
+<td>-1.302047e+14</td>
+<td>2.768756e+13</td>
+<td>⋯</td>
+<td>-5.584442e+13</td>
+<td>-8.733660e+13</td>
+<td>1.227695e+14</td>
+<td>6.164524e+13</td>
+<td>6.214777e+13</td>
+<td>1.251535e+13</td>
+<td>-1.331838e+13</td>
+<td>1.201692e+13</td>
+<td>-2.615826e+12</td>
+<td>3.306266e+13</td>
+</tr>
+<tr class="odd">
+<td>4.149307e+13</td>
+<td>-4.071010e+13</td>
+<td>2.005791e+12</td>
+<td>1.298411e+13</td>
+<td>-1.158167e+13</td>
+<td>4.289258e+13</td>
+<td>-7.881756e+13</td>
+<td>7.360487e+13</td>
+<td>3.143786e+12</td>
+<td>5.963643e+13</td>
+<td>⋯</td>
+<td>2.667877e+13</td>
+<td>-4.715871e+13</td>
+<td>-1.366837e+14</td>
+<td>1.892852e+13</td>
+<td>3.970782e+13</td>
+<td>1.026057e+14</td>
+<td>1.252981e+13</td>
+<td>9.438703e+13</td>
+<td>1.879153e+13</td>
+<td>7.323705e+13</td>
+</tr>
+<tr class="even">
+<td>9.665785e+13</td>
+<td>-3.170152e+13</td>
+<td>9.470709e+13</td>
+<td>-1.550622e+14</td>
+<td>4.777898e+13</td>
+<td>8.310319e+13</td>
+<td>7.511986e+13</td>
+<td>6.219071e+13</td>
+<td>-6.488625e+13</td>
+<td>-8.018700e+13</td>
+<td>⋯</td>
+<td>5.819561e+13</td>
+<td>1.283786e+13</td>
+<td>4.803796e+12</td>
+<td>-1.860438e+13</td>
+<td>1.878143e+13</td>
+<td>4.751284e+13</td>
+<td>1.470631e+13</td>
+<td>-4.832662e+13</td>
+<td>-1.392626e+14</td>
+<td>-7.331499e+13</td>
+</tr>
+<tr class="odd">
+<td>-4.342729e+13</td>
+<td>-1.423363e+13</td>
+<td>-1.022062e+14</td>
+<td>-1.227426e+13</td>
+<td>-1.846170e+13</td>
+<td>-1.263719e+12</td>
+<td>4.459100e+13</td>
+<td>7.845819e+13</td>
+<td>-9.389282e+12</td>
+<td>3.364330e+13</td>
+<td>⋯</td>
+<td>-3.596947e+12</td>
+<td>3.336648e+13</td>
+<td>-4.165686e+13</td>
+<td>2.448475e+13</td>
+<td>-3.014503e+12</td>
+<td>3.945151e+13</td>
+<td>-2.767083e+13</td>
+<td>4.117025e+13</td>
+<td>-9.580237e+12</td>
+<td>-2.459103e+13</td>
+</tr>
+<tr class="even">
+<td>-5.269030e+13</td>
+<td>4.350502e+13</td>
+<td>1.988749e+13</td>
+<td>-5.256736e+13</td>
+<td>-3.909076e+13</td>
+<td>-7.830792e+13</td>
+<td>3.451650e+13</td>
+<td>-4.279726e+13</td>
+<td>5.077414e+12</td>
+<td>-1.015483e+13</td>
+<td>⋯</td>
+<td>NaN</td>
+<td>-8.155206e+13</td>
+<td>-6.551715e+13</td>
+<td>-9.422143e+13</td>
+<td>-7.701483e+13</td>
+<td>-1.261747e+12</td>
+<td>-1.858944e+13</td>
+<td>8.759502e+12</td>
+<td>2.552983e+13</td>
+<td>-1.220929e+14</td>
+</tr>
+<tr class="odd">
+<td>-5.197277e+13</td>
+<td>1.038066e+12</td>
+<td>5.486699e+13</td>
+<td>1.922705e+14</td>
+<td>7.368996e+13</td>
+<td>-7.093454e+12</td>
+<td>4.312987e+13</td>
+<td>3.396175e+13</td>
+<td>7.624793e+13</td>
+<td>4.575635e+13</td>
+<td>⋯</td>
+<td>-8.155206e+13</td>
+<td>NaN</td>
+<td>1.139967e+14</td>
+<td>-1.651267e+14</td>
+<td>7.979925e+13</td>
+<td>-3.096723e+13</td>
+<td>-1.168950e+14</td>
+<td>-3.171327e+13</td>
+<td>1.599860e+14</td>
+<td>8.570285e+13</td>
+</tr>
+<tr class="even">
+<td>8.459680e+13</td>
+<td>-5.751836e+13</td>
+<td>2.342382e+14</td>
+<td>-1.092102e+14</td>
+<td>-1.576158e+13</td>
+<td>-1.249688e+14</td>
+<td>9.654302e+12</td>
+<td>-1.825610e+13</td>
+<td>2.384032e+13</td>
+<td>-1.799156e+14</td>
+<td>⋯</td>
+<td>-6.551715e+13</td>
+<td>1.139967e+14</td>
+<td>NaN</td>
+<td>7.894485e+13</td>
+<td>-5.377085e+13</td>
+<td>1.136659e+14</td>
+<td>1.280055e+13</td>
+<td>-5.181926e+13</td>
+<td>-1.616800e+14</td>
+<td>-1.773851e+14</td>
+</tr>
+<tr class="odd">
+<td>4.927410e+13</td>
+<td>-8.019741e+13</td>
+<td>4.101605e+13</td>
+<td>8.896426e+13</td>
+<td>-1.126358e+14</td>
+<td>-6.842659e+13</td>
+<td>-9.227944e+13</td>
+<td>-6.732116e+13</td>
+<td>1.598502e+14</td>
+<td>1.279291e+14</td>
+<td>⋯</td>
+<td>-9.422143e+13</td>
+<td>-1.651267e+14</td>
+<td>7.894485e+13</td>
+<td>NaN</td>
+<td>3.997576e+13</td>
+<td>-3.943898e+13</td>
+<td>-1.062269e+13</td>
+<td>7.616301e+13</td>
+<td>-6.196549e+13</td>
+<td>3.742521e+13</td>
+</tr>
+<tr class="even">
+<td>-1.982368e+13</td>
+<td>-4.606992e+13</td>
+<td>-9.453522e+13</td>
+<td>-5.083836e+13</td>
+<td>2.838176e+13</td>
+<td>3.944382e+13</td>
+<td>2.270829e+13</td>
+<td>-2.608072e+12</td>
+<td>2.339826e+13</td>
+<td>-6.669664e+12</td>
+<td>⋯</td>
+<td>-7.701483e+13</td>
+<td>7.979925e+13</td>
+<td>-5.377085e+13</td>
+<td>3.997576e+13</td>
+<td>NaN</td>
+<td>-3.359880e+13</td>
+<td>-1.603266e+13</td>
+<td>5.670818e+13</td>
+<td>5.000972e+13</td>
+<td>-4.260228e+13</td>
+</tr>
+<tr class="odd">
+<td>3.220046e+13</td>
+<td>-1.443169e+12</td>
+<td>-1.102471e+13</td>
+<td>2.966707e+13</td>
+<td>-5.266484e+13</td>
+<td>6.068348e+11</td>
+<td>-5.221622e+13</td>
+<td>9.710175e+13</td>
+<td>4.426618e+13</td>
+<td>-3.090588e+13</td>
+<td>⋯</td>
+<td>-1.261747e+12</td>
+<td>-3.096723e+13</td>
+<td>1.136659e+14</td>
+<td>-3.943898e+13</td>
+<td>-3.359880e+13</td>
+<td>NaN</td>
+<td>8.783183e+12</td>
+<td>-1.341014e+12</td>
+<td>1.941249e+12</td>
+<td>-2.624254e+12</td>
+</tr>
+<tr class="even">
+<td>-6.327815e+12</td>
+<td>-2.169960e+13</td>
+<td>-1.166797e+14</td>
+<td>1.030309e+13</td>
+<td>-4.596979e+12</td>
+<td>1.504867e+13</td>
+<td>-3.022689e+13</td>
+<td>2.516091e+13</td>
+<td>-5.911408e+13</td>
+<td>-1.646823e+13</td>
+<td>⋯</td>
+<td>-1.858944e+13</td>
+<td>-1.168950e+14</td>
+<td>1.280055e+13</td>
+<td>-1.062269e+13</td>
+<td>-1.603266e+13</td>
+<td>8.783183e+12</td>
+<td>NaN</td>
+<td>1.372857e+13</td>
+<td>1.299469e+13</td>
+<td>-1.463798e+13</td>
+</tr>
+<tr class="odd">
+<td>4.933892e+12</td>
+<td>2.603163e+13</td>
+<td>1.015711e+13</td>
+<td>-4.616620e+13</td>
+<td>3.558934e+13</td>
+<td>-1.549665e+13</td>
+<td>-2.219493e+13</td>
+<td>1.335878e+13</td>
+<td>1.243582e+13</td>
+<td>-5.989637e+13</td>
+<td>⋯</td>
+<td>8.759502e+12</td>
+<td>-3.171327e+13</td>
+<td>-5.181926e+13</td>
+<td>7.616301e+13</td>
+<td>5.670818e+13</td>
+<td>-1.341014e+12</td>
+<td>1.372857e+13</td>
+<td>NaN</td>
+<td>1.008579e+13</td>
+<td>-6.394614e+13</td>
+</tr>
+<tr class="even">
+<td>-3.084243e+13</td>
+<td>-1.556636e+13</td>
+<td>9.367715e+13</td>
+<td>-4.631240e+13</td>
+<td>7.790246e+12</td>
+<td>-6.540498e+11</td>
+<td>-4.404369e+13</td>
+<td>6.200788e+13</td>
+<td>4.979113e+13</td>
+<td>9.497850e+13</td>
+<td>⋯</td>
+<td>2.552983e+13</td>
+<td>1.599860e+14</td>
+<td>-1.616800e+14</td>
+<td>-6.196549e+13</td>
+<td>5.000972e+13</td>
+<td>1.941249e+12</td>
+<td>1.299469e+13</td>
+<td>1.008579e+13</td>
+<td>NaN</td>
+<td>-8.491475e+12</td>
+</tr>
+<tr class="odd">
+<td>1.723723e+13</td>
+<td>2.156171e+13</td>
+<td>5.964154e+12</td>
+<td>5.612400e+13</td>
+<td>-1.669013e+13</td>
+<td>-1.783056e+13</td>
+<td>4.356799e+13</td>
+<td>-4.761254e+12</td>
+<td>-1.769005e+13</td>
+<td>3.436922e+13</td>
+<td>⋯</td>
+<td>-1.220929e+14</td>
+<td>8.570285e+13</td>
+<td>-1.773851e+14</td>
+<td>3.742521e+13</td>
+<td>-4.260228e+13</td>
+<td>-2.624254e+12</td>
+<td>-1.463798e+13</td>
+<td>-6.394614e+13</td>
+<td>-8.491475e+12</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>upper.bound <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>lower.bound <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(antGLasso.mat) <span class="sc">&gt;</span> upper.bound) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(antGLasso.mat) <span class="sc">&gt;</span> lower.bound) <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+&lt;NA&gt;
+</div>
+<div class="cell-output cell-output-display">
+&lt;NA&gt;
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lambdas.antGLasso <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">19</span> <span class="sc">*</span> (<span class="fu">log</span>(upper.bound) <span class="sc">-</span> <span class="fu">log</span>(lower.bound)) <span class="sc">/</span> <span class="dv">19</span> <span class="sc">+</span> <span class="fu">log</span>(lower.bound))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>threshold.matrix <span class="ot">&lt;-</span> <span class="cf">function</span>(mat., threshold) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="fu">dim</span>(mat.)[[<span class="dv">1</span>]], <span class="fu">dim</span>(mat.)[[<span class="dv">2</span>]])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    mat[<span class="fu">abs</span>(mat.) <span class="sc">&lt;</span> threshold] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    mat[<span class="fu">abs</span>(mat.) <span class="sc">&gt;</span> threshold] <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(mat)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>antGLasso.path <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    lambdas.antGLasso,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(thresh) <span class="fu">threshold.matrix</span>(antGLasso.mat, thresh)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: ‘igraph’
+
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+
+The following object is masked from ‘package:base’:
+
+    union
+
+</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>get.assortativity.at.level <span class="ot">&lt;-</span> <span class="cf">function</span>(adjacency.graph, taxmat, taxa.level) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    groups <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.factor</span>(taxmat[, taxa.level]))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">assortativity</span>(adjacency.graph, groups))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>get.assortativity.at.levels <span class="ot">&lt;-</span> <span class="cf">function</span>(adjacency.graph, taxmat) {</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    curried.assortativity <span class="ot">&lt;-</span> <span class="cf">function</span>(taxa.level) <span class="fu">get.assortativity.at.level</span>(</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        adjacency.graph,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        taxmat,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        taxa.level</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lapply</span>(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>            <span class="fu">colnames</span>(taxmat),</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>            curried.assortativity</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        )[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">colnames</span>(taxmat))]</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    )        </span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot.all.assortativities <span class="ot">&lt;-</span> <span class="cf">function</span>(path, taxmat, lambdas) {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    graphs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lapply</span>(path, graph.adjacency),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        as.undirected</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    assortativities <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        graphs,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">function</span>(graph) <span class="fu">get.assortativity.at.levels</span>(graph, taxmat)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove first element as full of NaNs</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    assortativities <span class="ot">&lt;-</span> assortativities[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(assortativities)]</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    lambdas.short <span class="ot">&lt;-</span> lambdas[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(lambdas)]</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    assortativities<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">lapply</span>(assortativities, <span class="cf">function</span>(l) l[[<span class="dv">1</span>]]))</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    assortativities<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">lapply</span>(assortativities, <span class="cf">function</span>(l) l[[<span class="dv">2</span>]]))</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    assortativities<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">lapply</span>(assortativities, <span class="cf">function</span>(l) l[[<span class="dv">3</span>]]))</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    assortativities<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">lapply</span>(assortativities, <span class="cf">function</span>(l) l[[<span class="dv">4</span>]]))</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    assortativities<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">lapply</span>(assortativities, <span class="cf">function</span>(l) l[[<span class="dv">5</span>]]))</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(assortativities<span class="fl">.1</span>),</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x=</span>lambdas.short)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> assortativities<span class="fl">.1</span>, <span class="at">color =</span> <span class="st">"Phylum"</span>)) <span class="sc">+</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> assortativities<span class="fl">.2</span>, <span class="at">color =</span> <span class="st">"Class"</span>)) <span class="sc">+</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> assortativities<span class="fl">.3</span>, <span class="at">color =</span> <span class="st">"Order"</span>)) <span class="sc">+</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> assortativities<span class="fl">.4</span>, <span class="at">color =</span> <span class="st">"Family"</span>)) <span class="sc">+</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> assortativities<span class="fl">.5</span>, <span class="at">color =</span> <span class="st">"Genus"</span>)) <span class="sc">+</span></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_colour_manual</span>(<span class="st">""</span>, </span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Class"</span>, <span class="st">"Order"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>),</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>            <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"maroon"</span>, <span class="st">"red"</span>, <span class="st">"orange"</span>)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">+</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Regularization parameter lambda"</span>, <span class="at">y =</span> <span class="st">"Assortativities"</span>) <span class="sc">+</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggtitle</span>(<span class="st">"Assortativities at different taxonomic levels"</span>)</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"localdata/ll_deep.rda"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the taxmat columns to something more informative</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(taxmat) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Domain"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Phylum"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Class"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Family"</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Genus"</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./localdata/Zi-LN-master/inference.R"</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"./localdata/Zi-LN-master/utils/utils.R"</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"huge"</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"igraph"</span>)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a boolean 1135x3957 matrix of whether the species</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co"># was found in the person or not</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>nonzeros <span class="ot">&lt;-</span> counts <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the number of distinct people that possessed each species</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>num.nonzeros <span class="ot">&lt;-</span> <span class="fu">apply</span>(nonzeros, <span class="dv">2</span>, sum)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the total amount of people</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>total.cells <span class="ot">&lt;-</span> <span class="fu">dim</span>(counts)[<span class="dv">1</span>]</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Only keep the species who appear in more than 20% of the people</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>keep.indices <span class="ot">&lt;-</span> (num.nonzeros <span class="sc">/</span> total.cells) <span class="sc">&gt;</span> <span class="fl">0.2</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>counts_el <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(counts[, keep.indices])</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(counts_el, <span class="st">"./localdata/filtered-raw-counts-ziln.csv"</span>)</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>taxmat_el <span class="ot">&lt;-</span> taxmat[keep.indices,]</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the zs</span></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">warn =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="co"># turn warnings off because otherwise it's gonna scream...</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>zs <span class="ot">&lt;-</span> <span class="fu">infer_Z</span>(counts_el)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EiGLasso on transformed data (despite variable name)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EiGLasso on raw data (despite variable name)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGlasso on raw data</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGlasso with tera core on raw data</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># just the inversion of the empirical covariances</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-28-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># teralasso on raw data</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on raw data, eig core</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on raw data, iterative core</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="75">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on zs raw data, iterative core</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-32-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lambdas.antGLasso[[<span class="dv">15</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+0.000654727413379644
+</div>
+</div>
+<div class="cell" data-execution_count="110">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on zs raw data, iterative core fixed</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-34-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="116">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>lambdas.antGLasso[[<span class="dv">10</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+0.1071669964577
+</div>
+</div>
+<div class="cell" data-execution_count="126">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on zs data, iterative core fixed</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-36-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="128">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>lambdas.antGLasso[[<span class="dv">12</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+0.126951211276131
+</div>
+</div>
+<div class="cell" data-execution_count="238">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on zs data, iterative core fixed and sped up</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-38-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="250">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on raw data, iterative core fixed and sped up</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-39-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="256">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>lambdas.antGLasso[[<span class="dv">10</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+0.0964175997942495
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso on raw data with hessian</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.all.assortativities</span>(antGLasso.path, taxmat_el, lambdas.antGLasso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-41-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<section id="utilities" class="level1">
+<h1>Utilities</h1>
+<div class="cell" data-execution_count="81">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just to check that plotting still works</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>plot.graph <span class="ot">&lt;-</span> <span class="cf">function</span>(adjacency.graph, taxmat_el, taxa.level) {</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    color.graph.data <span class="ot">&lt;-</span> <span class="fu">color.graph</span>(taxmat_el, taxa.level)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    taxmat.colors <span class="ot">&lt;-</span> color.graph.data[[<span class="dv">1</span>]]</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    unique.taxa <span class="ot">&lt;-</span> color.graph.data[[<span class="dv">2</span>]]</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    hex.map <span class="ot">&lt;-</span> color.graph.data[[<span class="dv">3</span>]]</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>        adjacency.graph,</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">edge.color =</span> <span class="st">"green"</span>,</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="st">""</span>,</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.color =</span> taxmat.colors[,<span class="st">"color"</span>],</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">margin=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>        adjacency.graph,</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label.color =</span> <span class="st">"#00000000"</span>,</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.color =</span> <span class="st">"#00000000"</span>,</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">edge.color =</span> <span class="st">"#00000000"</span>,</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.frame.color =</span> <span class="st">"#00000000"</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">legend</span>(<span class="st">'top'</span>,</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend =</span> unique.taxa,</span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">bg =</span> <span class="st">"#757575"</span>,</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> hex.map,</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a function to color the graph</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>color.graph <span class="ot">&lt;-</span> <span class="cf">function</span>(taxmat_el, taxa.level) {</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a "color" column to prepare for coloring graph nodes</span></span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>    taxmat.colors <span class="ot">&lt;-</span> <span class="fu">cbind</span>(taxmat_el, <span class="st">"#000000"</span>)</span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(taxmat.colors)[<span class="fu">length</span>(<span class="fu">colnames</span>(taxmat.colors))] <span class="ot">&lt;-</span> <span class="st">"color"</span></span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>    unique.taxa <span class="ot">&lt;-</span> <span class="fu">unique</span>(taxmat.colors[,taxa.level])</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>    num.taxa <span class="ot">&lt;-</span> <span class="fu">length</span>(unique.taxa)</span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>    increment <span class="ot">&lt;-</span> <span class="dv">89</span> <span class="sc">/</span> (num.taxa<span class="dv">-1</span>)</span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>    increments <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="fu">round</span>(increment <span class="sc">*</span> <span class="dv">0</span><span class="sc">:</span>(num.taxa<span class="dv">-1</span>))</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>    hex.map <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"#19"</span>, increments, <span class="st">"60"</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num.taxa) {</span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>        taxmat.colors[</span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>            unique.taxa[i]<span class="sc">==</span>taxmat.colors[,taxa.level],</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a>            <span class="st">"color"</span></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>        ] <span class="ot">&lt;-</span> hex.map[i]</span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>        taxmat.colors,</span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a>        unique.taxa,</span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a>        hex.map</span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="make-plot" class="level1">
+<h1>Make Plot</h1>
+<div class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso unfixed iterative core</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.graph</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">graph.adjacency</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>        antGLasso.path[[<span class="dv">15</span>]],</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"Undirected"</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    taxmat_el,</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order"</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-43-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-43-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="115">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso fixed iterative core</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.graph</span>(</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">graph.adjacency</span>(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        antGLasso.path[[<span class="dv">10</span>]],</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"Undirected"</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    taxmat_el,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order"</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-44-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-44-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="134">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso fixed iterative core, zs</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.graph</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">graph.adjacency</span>(</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>        antGLasso.path[[<span class="dv">12</span>]],</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"Undirected"</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    taxmat_el,</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order"</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-45-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-45-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="255">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso sped-up fixed iterative core, raws</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.graph</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">graph.adjacency</span>(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>        antGLasso.path[[<span class="dv">10</span>]],</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"Undirected"</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    taxmat_el,</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order"</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-46-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-46-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="239">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># antGLasso sped-up fixed iterative core, zs</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.graph</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">graph.adjacency</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>        antGLasso.path[[<span class="dv">12</span>]],</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">"Undirected"</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    taxmat_el,</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Order"</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-47-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Fixed-antGLasso_files/figure-html/cell-47-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+    // Remove background
+    elements = document.querySelectorAll('[id=clean-collapse]').forEach(
+        function(element) {
+            element.classList.remove("callout-style-default");
+        }
+    )
+    
+    // Add arrow to front to signify dropdownyness
+    arrow = "▶";
+    elements = document.querySelectorAll('.callout-caption-container').forEach(
+        function(element) {
+            element.innerHTML = arrow + element.innerHTML;
+        }
+    )
+</script>
+<script src="https://giscus.app/client.js" data-repo="baileyandrew/blog" data-repo-id="R_kgDOInJwKg" data-category="Announcements" data-category-id="DIC_kwDOInJwKs4CTGOQ" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_protanopia" data-lang="en" data-loading="lazy" crossorigin="anonymous" async="">
+</script>
+<!--
+Assuming `_quarto.yml` has `navbar: pinned: true`,
+this will make it so that the navbar scrolls with the rest of the website.
+-->
+<script>
+    document.getElementById('quarto-header').classList.remove('fixed-top');
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

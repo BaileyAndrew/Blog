@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bailey Andrew">
+<meta name="dcterms.date" content="2023-01-22">
+<meta name="description" content="Another scRNA paper">
+
+<title>Lorem Ipsomething - A Living Biobank of Ovarian Cancer – Figure 5b-c</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../html_scripts/collapse.css">
+<link rel="stylesheet" href="../../html_scripts/pretty_shortcuts.css">
+<meta property="og:title" content="Lorem Ipsomething - A Living Biobank of Ovarian Cancer – Figure 5b-c">
+<meta property="og:description" content="Another scRNA paper">
+<meta property="og:image" content="https://BaileyAndrew.github.io/Blog/000_Blog/004_scRNA/images/tsne-reproduce-ovarian-fig5c.png">
+<meta property="og:site-name" content="Lorem Ipsomething">
+<meta property="og:image:height" content="842">
+<meta property="og:image:width" content="840">
+<meta name="twitter:title" content="Lorem Ipsomething - A Living Biobank of Ovarian Cancer – Figure 5b-c">
+<meta name="twitter:description" content="Another scRNA paper">
+<meta name="twitter:image" content="https://BaileyAndrew.github.io/Blog/000_Blog/004_scRNA/images/tsne-reproduce-ovarian-fig5c.png">
+<meta name="twitter:image-height" content="842">
+<meta name="twitter:image-width" content="840">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Lorem Ipsomething</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">A Living Biobank of Ovarian Cancer – Figure 5b-c</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../blog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../staticposts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Static Posts</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Puzzles</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../500_Puzzles/bnv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Boulders in Valleys</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slideshowindex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slideshows</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../otherblogs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Other People’s Blogs</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link active" data-scroll-target="#loading-the-data">Loading the Data</a></li>
+  <li><a href="#identifying-stromals" id="toc-identifying-stromals" class="nav-link" data-scroll-target="#identifying-stromals">Identifying <b style="color:#A6A440">stromals</b></a></li>
+  <li><a href="#fig-5b" id="toc-fig-5b" class="nav-link" data-scroll-target="#fig-5b"><b style="color:#EB1960">Fig 5b</b></a></li>
+  <li><a href="#fig-5c" id="toc-fig-5c" class="nav-link" data-scroll-target="#fig-5c"><b style="color:#EB1960">Fig 5c</b></a></li>
+  <li><a href="#going-offscript" id="toc-going-offscript" class="nav-link" data-scroll-target="#going-offscript">Going Offscript</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/BaileyAndrew/Blog/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Living Biobank of Ovarian Cancer – Figure 5b-c</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Work</div>
+    <div class="quarto-category">Omics</div>
+    <div class="quarto-category">Useful</div>
+    <div class="quarto-category">Paper Replication</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Another scRNA paper
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bailey Andrew </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 22, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>We’ll continue where we left off in the last post, trying to recreate <b style="color:#EB1960">Figure 5</b> from a paper by <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#ref-ovarian-cancer-living-biobank" role="doc-biblioref">2020</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/ovarian-fig5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><b style="color:#EB1960">Figure 5</b>. Not my own work</figcaption>
+</figure>
+</div>
+<p>This time, we’ll focus on <b style="color:#EB1960">Figure 5b</b>, which entails deciding whether a cell is <b style="color:#A6A440">stromal</b> or <b style="color:#A6A440">tumour</b>.</p>
+<blockquote class="blockquote">
+<p><b style="color:#EB1960">5b)</b> Dot plots quantitating the percentage of cells in the <b style="color:#EB1960">stromal</b> and <b style="color:#EB1960">tumour</b> clusters. Line represents the mean (N = 4 biological independent samples i.e.&nbsp;n = 1 for each of the four <b style="color:#A6A440">OCMsM</b>).</p>
+<p>– <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#ref-ovarian-cancer-living-biobank" role="doc-biblioref">2020</a>)</span></p>
+</blockquote>
+<section id="loading-the-data" class="level1 page-columns page-full">
+<h1>Loading the Data</h1>
+<p>To get started, we’ll load in our data and then create a <code>SingleCellExperiment</code> class from the eponymous <code>SingleCellExperiment</code> package. This is a dependency of <code>scran</code> and <code>scater</code> which were installed in the last post; so we’ll go ahead and the latter two (and we’ll explicitly load <code>SingleCellExperiment</code> this time for clarity).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For reproducibility</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SingleCellExperiment)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scran)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scater)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>counts.mat <span class="ot">&lt;-</span> Matrix<span class="sc">::</span><span class="fu">readMM</span>(<span class="st">'./localdata/ovarian-cancer-hgv-counts.mtx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>counts.rows <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./localdata/ovarian-cancer-hgv-rows.csv'</span>, <span class="at">sep=</span><span class="st">','</span>)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>counts.cols <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./localdata/ovarian-cancer-hgv-columns.csv'</span>, <span class="at">sep=</span><span class="st">','</span>)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>counts.meta <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'./localdata/ovarian-cancer-hgv-metadata.csv'</span>, <span class="at">sep=</span><span class="st">','</span>)[,<span class="sc">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(counts.mat) <span class="ot">&lt;-</span> counts.rows</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(counts.mat) <span class="ot">&lt;-</span> counts.cols</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From documentation, it seems like the convention is to abbreviate <code>SingleCellExperiment</code> as <code>sce</code>, so we’ll name our data<code>ovarian.sce</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce <span class="ot">&lt;-</span> <span class="fu">SingleCellExperiment</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">assays=</span><span class="fu">list</span>(<span class="at">counts=</span>counts.mat),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add patient metadata</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>patient <span class="ot">&lt;-</span> counts.meta<span class="sc">$</span>Sample.Characteristic.individual.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a peak at internal structure</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ovarian.sce</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 6454 18757 
+metadata(0):
+assays(1): counts
+rownames(6454): ENSG00000000457 ENSG00000000460 ... ENSG00000288504
+  ENSG00000288649
+rowData names(0):
+colnames(18757): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(1): patient
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+<p>While R somewhat markets itself as a functional<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> language<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, the way data is used tends to look a tad imperative. We’ll be writing a lot of lines that look like:</p>
+<pre class="{R}"><code>ovarian.sce &lt;- f(ovarian.sce)</code></pre>
+<p>Which, yeah, is genuinely functional:</p>
+<pre class="{R}"><code># This does not change `ovarian.sce`
+ovarian.sce.f &lt;- f(ovarian.sce)</code></pre>
+<p>But it feels like it’s functional being used with an imperative mindset 😅. It feels a bit weird to me! But it’s not a big deal.</p>
+<p>Let’s take the log of our data. We’ll use <code>logNormCounts</code> from the <code>scuttle</code> package<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. This will have the side effect of normalizing our data, but since our data was already normalized I don’t think this will cause a problem? 🤷‍♂️ I’m just being quick and dirty here to get some experience using the <code>SingleCellExperiment</code> class, we saw an example of manually normalizing in the last blog post so we won’t worry too much here.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce <span class="ot">&lt;-</span> scuttle<span class="sc">::</span><span class="fu">logNormCounts</span>(ovarian.sce)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see that we now have a new <b style="color:#A6A440">assay</b>, <code>logcounts</code>, as well as more <code>colData</code> “<code>sizeFactor</code>”. The latter is the value we used to scale counts for normalization.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 6454 18757 
+metadata(0):
+assays(2): counts logcounts
+rownames(6454): ENSG00000000457 ENSG00000000460 ... ENSG00000288504
+  ENSG00000288649
+rowData names(0):
+colnames(18757): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(2): patient sizeFactor
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(ovarian.sce)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>DataFrame with 18757 rows and 2 columns
+                                  patient sizeFactor
+                              &lt;character&gt;  &lt;numeric&gt;
+SAMEA6492740-AAACCCACAGTTAGGG         38b   1.127861
+SAMEA6492740-AAACCCACATGTGTCA         38b   1.110393
+SAMEA6492740-AAACCCAGTCGCATGC         38b   1.701412
+SAMEA6492740-AAACCCAGTCTTTCAT         38b   1.058486
+SAMEA6492740-AAACCCATCCGTGTCT         38b   0.586412
+...                                   ...        ...
+SAMEA6492743-TTTGGTTTCATCGTAG          79   1.364770
+SAMEA6492743-TTTGTTGCAACCGACC          79   0.249135
+SAMEA6492743-TTTGTTGGTCAGTCCG          79   1.374554
+SAMEA6492743-TTTGTTGGTCCTGGTG          79   1.357728
+SAMEA6492743-TTTGTTGTCAGATTGC          79   1.021525</code></pre>
+</div>
+</div>
+<p>Since <b style="color:#EB1960">Figue 5b</b> is dependent on knowing the <b style="color:#A6A440">tumor</b> and <b style="color:#A6A440">stromal</b> cells, which were deduced using <b style="color:#537FBF">tSNE</b> by <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#ref-ovarian-cancer-living-biobank" role="doc-biblioref">2020</a>)</span>, we’ll get set up with that as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># They only ran tSNE on the first 14 dimensions of PCA-transformed data.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The `assay.type` defaults to "logcounts" but I wanted to be explicit</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># since it's not obvious that it would (although it is sensible that it does).</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    ovarian.sce <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">fixedPCA</span>(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        ovarian.sce,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">rank=</span><span class="dv">14</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">subset.row=</span><span class="cn">NULL</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">assay.type=</span><span class="st">"logcounts"</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">error=</span><span class="cf">function</span>(e){<span class="fu">print</span>(e)}</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;simpleError in MatrixGenerics:::.load_next_suggested_package_to_search(x): Failed to find a colVars() method for dgTMatrix objects.&gt;</code></pre>
+</div>
+</div>
+<p>This error is a nuisance, but it seems like it’s an issue with <code>dgTMatrix</code> being for <strong style="color:#C0CF96">dweebs</strong>. We should use <code>dgCMatrix</code> instead (<a href="https://support.bioconductor.org/p/100954/">thanks internet!</a>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert assays to dgCMatrix</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(ovarian.sce, <span class="st">"counts"</span>) <span class="ot">&lt;-</span> <span class="fu">as</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>(ovarian.sce, <span class="st">"counts"</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CsparseMatrix"</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(ovarian.sce, <span class="st">"logcounts"</span>) <span class="ot">&lt;-</span> <span class="fu">as</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assay</span>(ovarian.sce, <span class="st">"logcounts"</span>),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CsparseMatrix"</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">fixedPCA</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">rank=</span><span class="dv">14</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">subset.row=</span><span class="cn">NULL</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">assay.type=</span><span class="st">"logcounts"</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce <span class="ot">&lt;-</span> scater<span class="sc">::</span><span class="fu">runTSNE</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">dimred=</span><span class="st">"PCA"</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 6454 18757 
+metadata(0):
+assays(2): counts logcounts
+rownames(6454): ENSG00000000457 ENSG00000000460 ... ENSG00000288504
+  ENSG00000288649
+rowData names(0):
+colnames(18757): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(2): patient sizeFactor
+reducedDimNames(2): PCA TSNE
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotReducedDim</span>(ovarian.sce, <span class="at">dimred=</span><span class="st">"TSNE"</span>, <span class="at">colour_by=</span><span class="st">"patient"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="012_Cancer3_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>This looks much better than last post… Which probably means I made a mistake with the normalization somewhere there 😬</p>
+</div></div></section>
+<section id="identifying-stromals" class="level1">
+<h1>Identifying <b style="color:#A6A440">stromals</b></h1>
+<p>The paper claims that the <b style="color:#A6A440">tumor</b> cells are the ones in the single-patient clusters and the <b style="color:#A6A440">stromal</b> cells are the ones in the multi-patient cluster. To partition them ourself, we need a clustering method! We’ll do <code>scran::clusterCells</code> because <code>scran</code> hasn’t failed us yet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">clusterCells</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">use.dimred=</span><span class="st">"TSNE"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotReducedDim</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TSNE"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_by=</span><span class="st">"tumor.stromal.clusters"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape_by=</span><span class="st">"patient"</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="012_Cancer3_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Annoyingly, this is way too many clusters! So we’ll have to tune the parameters a bit.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This library is needed to specify graph parameters</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">clusterCells</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">use.dimred=</span><span class="st">"TSNE"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">BLUSPARAM=</span>bluster<span class="sc">::</span><span class="fu">KmeansParam</span>(<span class="at">centers=</span><span class="dv">5</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plotReducedDim</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TSNE"</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_by=</span><span class="st">"tumor.stromal.clusters"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape_by=</span><span class="st">"patient"</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="012_Cancer3_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>There we go! It seems that either Cluster 1 or 5 is the cluster we want to remove - it’s hard for me to tell because I’m colorblind<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. So let’s see how heterogenous the candidate clusters are:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ovarian.sce[,ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">1</span>]<span class="sc">$</span>patient)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ovarian.sce[,ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">5</span>]<span class="sc">$</span>patient)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>'38b'</li><li>'59'</li><li>'74-1'</li><li>'79'</li></ol>
+</div>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>'38b'</li><li>'79'</li></ol>
+</div>
+</div>
+<p>It seems clear that <b style="color:#C0CF96">Cluster 1</b> is our heterogenous cluster, and hence represents our <b style="color:#A6A440">stromal cells</b>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>stromal.index <span class="ot">&lt;-</span> ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fig-5b" class="level1">
+<h1><b style="color:#EB1960">Fig 5b</b></h1>
+<p>To make <b style="color:#EB1960">Fig 5b</b>, we just need to now know the relative proportions of <b style="color:#A6A440">tumor</b> and <b style="color:#A6A440">stromal</b> cells on a per-patient level.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>patient<span class="fl">.38</span>b.index <span class="ot">&lt;-</span> ovarian.sce<span class="sc">$</span>patient<span class="sc">==</span><span class="st">'38b'</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>patient.<span class="fl">59.</span>index <span class="ot">&lt;-</span> ovarian.sce<span class="sc">$</span>patient<span class="sc">==</span><span class="st">'59'</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>patient<span class="fl">.74</span>_1.index <span class="ot">&lt;-</span> ovarian.sce<span class="sc">$</span>patient<span class="sc">==</span><span class="st">'74-1'</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>patient.<span class="fl">79.</span>index <span class="ot">&lt;-</span> ovarian.sce<span class="sc">$</span>patient<span class="sc">==</span><span class="st">'79'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get raw amount for each patient</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>stromal.amount <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.38b=</span>patient<span class="fl">.38</span>b.index <span class="sc">&amp;</span> stromal.index,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.59=</span>patient.<span class="fl">59.</span>index <span class="sc">&amp;</span> stromal.index,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.74_1=</span>patient<span class="fl">.74</span>_1.index <span class="sc">&amp;</span> stromal.index,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.79=</span>patient.<span class="fl">79.</span>index <span class="sc">&amp;</span> stromal.index</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>tumor.amount <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.38b=</span>patient<span class="fl">.38</span>b.index <span class="sc">&amp;</span> <span class="sc">!</span>stromal.index,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.59=</span>patient.<span class="fl">59.</span>index <span class="sc">&amp;</span> <span class="sc">!</span>stromal.index,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.74_1=</span>patient<span class="fl">.74</span>_1.index <span class="sc">&amp;</span> <span class="sc">!</span>stromal.index,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">patient.79=</span>patient.<span class="fl">79.</span>index <span class="sc">&amp;</span> <span class="sc">!</span>stromal.index</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the percents</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(stromal.amount, tumor.amount)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data<span class="sc">$</span>patient <span class="ot">&lt;-</span> <span class="fu">rownames</span>(tumor.stromal.data)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data<span class="sc">$</span>stromal.percent <span class="ot">&lt;-</span> (</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    tumor.stromal.data<span class="sc">$</span>stromal.amount <span class="sc">/</span> (</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        tumor.stromal.data<span class="sc">$</span>stromal.amount <span class="sc">+</span> tumor.stromal.data<span class="sc">$</span>tumor.amount</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data<span class="sc">$</span>tumor.percent <span class="ot">&lt;-</span> (</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    tumor.stromal.data<span class="sc">$</span>tumor.amount <span class="sc">/</span> (</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        tumor.stromal.data<span class="sc">$</span>stromal.amount <span class="sc">+</span> tumor.stromal.data<span class="sc">$</span>tumor.amount</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 4 × 5</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">stromal.amount</th>
+<th data-quarto-table-cell-role="th" scope="col">tumor.amount</th>
+<th data-quarto-table-cell-role="th" scope="col">patient</th>
+<th data-quarto-table-cell-role="th" scope="col">stromal.percent</th>
+<th data-quarto-table-cell-role="th" scope="col">tumor.percent</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;dbl&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">patient.38b</td>
+<td>1230</td>
+<td>3976</td>
+<td>patient.38b</td>
+<td>0.2362658</td>
+<td>0.7637342</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">patient.59</td>
+<td>693</td>
+<td>3003</td>
+<td>patient.59</td>
+<td>0.1875000</td>
+<td>0.8125000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" scope="row">patient.74_1</td>
+<td>1854</td>
+<td>4111</td>
+<td>patient.74_1</td>
+<td>0.3108131</td>
+<td>0.6891869</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th" scope="row">patient.79</td>
+<td>849</td>
+<td>3041</td>
+<td>patient.79</td>
+<td>0.2182519</td>
+<td>0.7817481</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Format it to work in `geom_dotplot`</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data.for.dotplot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">percent=</span><span class="fu">as.integer</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(tumor.stromal.data<span class="sc">$</span>stromal.percent, tumor.stromal.data<span class="sc">$</span>tumor.percent) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tumor.stromal=</span><span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"S"</span>, <span class="st">"S"</span>, <span class="st">"S"</span>, <span class="st">"T"</span>, <span class="st">"T"</span>, <span class="st">"T"</span>, <span class="st">"T"</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>tumor.stromal.data.for.dotplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>A data.frame: 8 × 2</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" scope="col">percent</th>
+<th data-quarto-table-cell-role="th" scope="col">tumor.stromal</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th" scope="col">&lt;int&gt;</th>
+<th data-quarto-table-cell-role="th" scope="col">&lt;chr&gt;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>23</td>
+<td>S</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td>31</td>
+<td>S</td>
+</tr>
+<tr class="even">
+<td>21</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td>76</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>81</td>
+<td>T</td>
+</tr>
+<tr class="odd">
+<td>68</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>78</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tumor.stromal.data.for.dotplot, <span class="fu">aes</span>(<span class="at">x=</span>tumor.stromal, <span class="at">y=</span>percent)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">'y'</span>, <span class="at">stackdir=</span><span class="st">'center'</span>) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">fun=</span>mean,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">geom=</span><span class="st">"crossbar"</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">size=</span><span class="fl">0.5</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">width=</span><span class="fl">0.3</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">color=</span><span class="st">"red"</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Stromal vs Tumor"</span>) <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Cell Count (%)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Bin width defaults to 1/30 of the range of the data. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="012_Cancer3_files/figure-html/cell-29-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="fig-5c" class="level1">
+<h1><b style="color:#EB1960">Fig 5c</b></h1>
+<blockquote class="blockquote">
+<p><b style="color:#EB1960">Fig 5c)</b> <b style="color:#537FBF">t-SNE plot</b> from a overlaid with <b style="color:#A6A440">XIST expression</b></p>
+<p>Moreover, cells in two of the distinct clusters did not express <b style="color:#A6A440">XIST</b> (<b style="color:#EB1960">Fig. 5c</b>), consistent with loss of the <b style="color:#A6A440">inactive X chromosome</b>.</p>
+<p>– What <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#ref-ovarian-cancer-living-biobank" role="doc-biblioref">2020</a>)</span> has to say about <b style="color:#EB1960">Fig 5c</b></p>
+</blockquote>
+<p><a href="https://www.ensembl.org/Homo_sapiens/Gene/Ontologies/biological_process?g=ENSG00000229807;r=X:73820649-73852723">We can see</a> that <b style="color:#A6A440">XIST</b> is also known as <b style="color:#A6A440">ENSG00000229807</b>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000229807"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+</div>
+<p>But, uh, it’s not in our dataset. I even checked to see if we filtered it out, but its not there. This is a fairly major issue.</p>
+<p>Some replacement genes:</p>
+<ul>
+<li><b style="color:#A6A440">JPX</b>: <b style="color:#A6A440">ENSG00000225470</b></li>
+<li><b style="color:#A6A440">FTX</b>: <b style="color:#A6A440">ENSG00000230590</b></li>
+<li><b style="color:#A6A440">TSIX</b>: <b style="color:#A6A440">ENSG00000270641</b></li>
+<li><b style="color:#A6A440">EPCAM</b>: <b style="color:#A6A440">ENSG00000119888</b></li>
+<li><b style="color:#A6A440">TP53</b>: <b style="color:#A6A440">ENSG00000141510</b></li>
+<li><b style="color:#A6A440">MYC</b>: <b style="color:#A6A440">ENSG00000136997</b></li>
+</ul>
+<p>I found some of these by picking apart this quote referring to <b style="color:#EB1960">Fig 4</b>:</p>
+<blockquote class="blockquote">
+<p>This classification was supported by interrogating specific genes, with the tumour cells expressing <b style="color:#A6A440">EPCAM</b>, <b style="color:#A6A440">TP53</b> and <b style="color:#A6A440">MYC</b> but negative for <b style="color:#A6A440">XIST</b> and <b style="color:#A6A440">TSIX</b>, consistent with loss of the inactive X chromosome (<b style="color:#EB1960">Fig. 4c</b>)</p>
+</blockquote>
+<p>And the rest from <a href="https://en.wikipedia.org/wiki/XIST">wikipedia</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000225470"</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000230590"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000270641"</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000119888"</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000141510"</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000136997"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+<div class="cell-output cell-output-display">
+TRUE
+</div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+</div>
+<p>So it seems like, of the data the genes they claim to have been looking at, only one of them is actually in their dataset. I’m sure I’m missing something here, but there’s not much I can do about it. The description of <b style="color:#A6A440">TP53</b> is “tumor protein p53” according to <b style="color:#EB1960">Ensembl</b>, so it certainly seems relevant!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removed all zero counts to prevent clutter</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotReducedDim</span>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    ovarian.sce[,<span class="fu">which</span>(<span class="fu">assay</span>(ovarian.sce, <span class="st">"counts"</span>)[<span class="st">"ENSG00000141510"</span>,] <span class="sc">&gt;</span> <span class="dv">0</span>)],</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TSNE"</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_by=</span><span class="st">"ENSG00000141510"</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape_by=</span><span class="st">"patient"</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="012_Cancer3_files/figure-html/cell-32-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>We can see nothing informative here, it seems.</p>
+<p>Maybe we can salvage a pretty graph by looking at the famous <b style="color:#A6A440">BRCA1</b> (<b style="color:#A6A440">ENSG00000012048</b>) gene?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">rownames</span>(ovarian.sce) <span class="sc">==</span> <span class="st">"ENSG00000012048"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+FALSE
+</div>
+</div>
+<p>No<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+</section>
+<section id="going-offscript" class="level1">
+<h1>Going Offscript</h1>
+<p>The fact that <b style="color:#A6A440">XIST</b> does not exist is quite annoying. Let’s find another marker gene to get a pretty plot!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>ovarian.sce</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 6454 18757 
+metadata(0):
+assays(2): counts logcounts
+rownames(6454): ENSG00000000457 ENSG00000000460 ... ENSG00000288504
+  ENSG00000288649
+rowData names(0):
+colnames(18757): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(3): patient sizeFactor tumor.stromal.clusters
+reducedDimNames(2): PCA TSNE
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>marker.info <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">scoreMarkers</span>(ovarian.sce, ovarian.sce<span class="sc">$</span>tumor.stromal.clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We should pick a marker for cluster 1,</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># because its the only stromal cell cluster</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># so we should expect it to have clearly differentially expressed genes.</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>chosen <span class="ot">&lt;-</span> marker.info[[<span class="st">"1"</span>]]</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(ovarian.sce)[<span class="fu">order</span>(chosen<span class="sc">$</span>mean.AUC, <span class="at">decreasing=</span><span class="cn">TRUE</span>)[[<span class="dv">1</span>]]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+'ENSG00000106366'
+</div>
+</div>
+<p><b style="color:#A6A440">ENSG00000106366</b> is also known as <b style="color:#A6A440">SERPINE1</b>, which is kinda cool.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For pretty display, let's label each cluster as either</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tumor or stromal</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal <span class="ot">&lt;-</span> <span class="st">"Unspecified"</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Stromal Cell"</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor Cell (1)"</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="sc">==</span> <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor Cell (2)"</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="sc">==</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor Cell (3)"</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="sc">==</span> <span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor Cell (4)"</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>ovarian.sce</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 6454 18757 
+metadata(0):
+assays(2): counts logcounts
+rownames(6454): ENSG00000000457 ENSG00000000460 ... ENSG00000288504
+  ENSG00000288649
+rowData names(0):
+colnames(18757): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(4): patient sizeFactor tumor.stromal.clusters
+  tumor.or.stromal
+reducedDimNames(2): PCA TSNE
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotReducedDim</span>(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    ovarian.sce,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TSNE"</span>,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour_by=</span><span class="st">"ENSG00000106366"</span>,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape_by=</span><span class="st">"patient"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">text_by=</span><span class="st">"tumor.or.stromal"</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">text_colour=</span><span class="st">"cyan"</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Ovarian Cancer Cells by SERPINE1 (ENSG00000106366) Expression"</span>) <span class="sc">+</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"darkblue"</span>),</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"cyan"</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="012_Cancer3_files/figure-html/cell-38-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>This is quite a strong result! Of course, it’s a result that’s already known:</p>
+<blockquote class="blockquote">
+<p><b style="color:#A6A440">SERPINE1</b> has been proven to be the most reliable biological and prognostic marker for a variety of cancers, including <b style="color:#A6A440">breast cancer</b>, <b style="color:#A6A440">ovarian cancer</b>, <b style="color:#A6A440">bladder cancer</b>, <b style="color:#A6A440">colon cancer</b>, <b style="color:#A6A440">kidney cancer</b> and <b style="color:#A6A440">non-small cell lung cancer</b>.</p>
+<p>– <span class="citation" data-cites="SERPINE1">Chen et al. (<a href="#ref-SERPINE1" role="doc-biblioref">2022</a>)</span></p>
+</blockquote>
+<p>But still, it makes a nice plot.</p>
+<p>My takeaways from these past two blog posts are:</p>
+<ul>
+<li>“Every cancer is unique” is not just a buzzphrase; the variation between cancers in different people is far greater than the variation between stromal cells between people</li>
+<li><b style="color:#A6A440">SERPINE1</b> is a biomarker for cancer</li>
+<li><code>SingleCellExperiment</code> is a nice way to group data</li>
+<li><b style="color:#EB1960">Bioconductor</b> has amazing online resources and a nice suite of packages</li>
+</ul>
+<p>I quite liked going offscript at the end. I may delve further into <b style="color:#537FBF">differential expression</b> in the next blogpost, or I might take a look at <b style="color:#537FBF">16S rRNA sequencing</b>. Not sure.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-SERPINE1" class="csl-entry" role="listitem">
+Chen, S., Y. Li, Y. Zhu, J. Fei, L. Song, G. Sun, L. Guo, and X. Li. 2022. <span>“<span class="nocase"><span>S</span><span>E</span><span>R</span><span>P</span><span>I</span><span>N</span><span>E</span>1 <span>O</span>verexpression <span>P</span>romotes <span>M</span>alignant <span>P</span>rogression and <span>P</span>oor <span>P</span>rognosis of <span>G</span>astric <span>C</span>ancer</span>.”</span> <em>J Oncol</em> 2022: 2647825.
+</div>
+<div id="ref-ovarian-cancer-living-biobank" class="csl-entry" role="listitem">
+Nelson, Louisa, Anthony Tighe, Anya Golder, Samantha Littler, Bjorn Bakker, Daniela Moralli, Syed Murtuza Baker, et al. 2020. <span>“A Living Biobank of Ovarian Cancer Ex Vivo Models Reveals Profound Mitotic Heterogeneity.”</span> <em>Nature Communications</em> 11 (1): 822. <a href="https://doi.org/10.1038/s41467-020-14551-2">https://doi.org/10.1038/s41467-020-14551-2</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In the sense of “functional programming”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Although it does allow for non-functional styles too<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>already loaded as a dependency of either <code>scran</code> or <code>scatter</code>, I have no idea which.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>I should have thought of that before making the graph…<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>In their defence, <b style="color:#A6A440">BRCA1</b> is actually in the dataset, it just got filtered out before we got here.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script>
+    // Remove background
+    elements = document.querySelectorAll('[id=clean-collapse]').forEach(
+        function(element) {
+            element.classList.remove("callout-style-default");
+        }
+    )
+    
+    // Add arrow to front to signify dropdownyness
+    arrow = "▶";
+    elements = document.querySelectorAll('.callout-caption-container').forEach(
+        function(element) {
+            element.innerHTML = arrow + element.innerHTML;
+        }
+    )
+</script>
+<script src="https://giscus.app/client.js" data-repo="baileyandrew/blog" data-repo-id="R_kgDOInJwKg" data-category="Announcements" data-category-id="DIC_kwDOInJwKs4CTGOQ" data-mapping="title" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_protanopia" data-lang="en" data-loading="lazy" crossorigin="anonymous" async="">
+</script>
+<!--
+Assuming `_quarto.yml` has `navbar: pinned: true`,
+this will make it so that the navbar scrolls with the rest of the website.
+-->
+<script>
+    document.getElementById('quarto-header').classList.remove('fixed-top');
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
