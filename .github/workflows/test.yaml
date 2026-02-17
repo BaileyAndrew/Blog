@@ -11,4 +11,8 @@ jobs:
         with:
           python-version: '3.10'
 
+      - run: pip install --upgrade pip setuptools wheel
+
+      - run: pip install -e . --no-build-isolation
+
       - uses: fastai/workflows/nbdev-ci@master
