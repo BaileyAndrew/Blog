@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Bailey Andrew">
+  <title>Lorem Ipsomething – Journal Club</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-73806f0e93c0950b605bb3afe7220856.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<meta property="og:title" content="Journal Club – Lorem Ipsomething">
+<meta property="og:description" content="Omics Data is the Future of Medicine">
+<meta property="og:site_name" content="Lorem Ipsomething">
+<meta name="twitter:title" content="Journal Club – Lorem Ipsomething">
+<meta name="twitter:description" content="Omics Data is the Future of Medicine">
+<meta name="twitter:card" content="summary">
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title"><b style="color:#A6A440">Journal Club</b></h1>
+  <p class="subtitle"><b style="color:#EB1960">Omics Data</b> <em>is</em> the <b style="color:#C0CF96">Future of Medicine</b></p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+<b style="color:#A6A440">Bailey Andrew</b> 
+</div>
+</div>
+</div>
+
+  <p class="date">Feb 1, 2023</p>
+</section>
+<section class="slide level2">
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+</section>
+<section>
+<section id="cancer-from-an-omics-perspective" class="title-slide slide level1 center">
+<h1><b style="color:#537FBF">Cancer</b>, from an <b style="color:#EB1960">omics</b> perspective</h1>
+
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="./images/dancer-cell.jpeg" class="r-stretch quarto-figure-center"><p class="caption"><b style="color:#C0CF96">Many ‘omics’</b>: <b style="color:#A6A440">genomics</b>, <b style="color:#A6A440">transcriptomics</b>, <b style="color:#A6A440">proteomics</b>, etc…</p></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="./images/cancer-an-overview.jpeg" class="r-stretch quarto-figure-center"><p class="caption"><b style="color:#A6A440">Cells</b> <b style="color:#537FBF">divide</b> and <b style="color:#537FBF">accrue mutations</b></p></section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+
+<img data-src="./images/cancer-cell.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Things can <b style="color:#C0CF96">go wrong</b> at the <b style="color:#A6A440">omics</b> level</p></section></section>
+<section>
+<section id="why-should-you-care" class="title-slide slide level1 center">
+<h1>Why should <em style="color:#537FBF">you</em> care?</h1>
+
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<ul>
+<li>Many diseases are caused by an <b style="color:#A6A440">omics</b> issue</li>
+</ul>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>When so, other data is a <b style="color:#C0CF96">proxy</b><sup>1</sup></li>
+</ul>
+</div>
+<ul>
+<li class="fragment"><b style="color:#EB1960">heterogenous tumors</b>?: <b style="color:#A6A440">single-cell omics</b></li>
+</ul>
+<ul>
+<li class="fragment">Symptoms may be caused by <b style="color:#A6A440">omics</b> issues
+<ul>
+<li class="fragment"><b style="color:#A6A440">Proteomics</b> enables better design of treatments?</li>
+</ul></li>
+</ul>
+<div class="fragment" data-fragment-index="2">
+<p><small><small><sup><sup>1)</sup></sup> Well, environmental factors can be a cause, but limited ability to affect them </small></small></p>
+</div>
+</section></section>
+<section>
+<section id="now-that-you-care" class="title-slide slide level1 center">
+<h1>Now that you care…</h1>
+
+</section>
+<section id="hands-on-learning-experience" class="slide level2">
+<h2><b style="color:#C0CF96">Hands-on Learning Experience™</b></h2>
+
+<img data-src="./images/sce-atlas.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-8559/">https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-8559/</a></p></section>
+<section id="dataset-details---where" class="slide level2">
+<h2>Dataset Details - Where?</h2>
+<blockquote>
+<p>To build a living biobank, we established a <b style="color:#537FBF">biopsy</b> pipeline, collecting samples from patients diagnosed with <b style="color:#A6A440">epithelial ovarian cancer</b> treated at the <b style="color:#EB1960">Christie Hospital</b>.</p>
+<p>– <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</blockquote>
+<p>(<b style="color:#EB1960">Christie Hospital</b> is in Manchester)</p>
+</section>
+<section id="dataset-details---who" class="slide level2">
+<h2>Dataset Details - Who?</h2>
+<blockquote>
+<p>Between <b style="color:#EB1960">May 2016</b> and <b style="color:#EB1960">June 2019</b>, we collected <b style="color:#C0CF96">312 samples</b> from patients with <b style="color:#A6A440">chemo-naïve</b> and <b style="color:#A6A440">relapsed disease</b>, either as <b style="color:#537FBF">solid biopsies</b> or as <b style="color:#537FBF">ascites</b> (<b style="color:#EB1960">Fig. 1a</b>)</p>
+<p>Ten patients had <b style="color:#A6A440">HGSOC</b> while two had <b style="color:#A6A440">mucinous ovarian carcinoma</b>. <b style="color:#537FBF">Longitudinal biopsies</b> were collected from three patients.</p>
+<p>– <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</blockquote>
+</section>
+<section id="dataset-details---how" class="slide level2">
+<h2>Dataset Details - How?</h2>
+<blockquote>
+<p>The primer contains:</p>
+<ul>
+<li><p>an Illumina TruSeq Read 1 (read 1 sequencing primer)</p></li>
+<li><p>16 nt 10x Barcode</p></li>
+<li><p>12 nt <b style="color:#A6A440">unique molecular identifier (UMI)</b></p></li>
+<li><p>30 nt poly(dT) sequence</p></li>
+</ul>
+<p>Barcoded, full-length <b style="color:#A6A440">cDNA</b> is amplified via <b style="color:#537FBF">PCR</b> to generate sufficient mass for library construction.</p>
+<p>– <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</blockquote>
+</section>
+<section id="load-the-data" class="slide level2">
+<h2>Load the Data</h2>
+<div id="64c2cc9d-3fc5-423f-b357-1e02ec4e50b3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>file.path <span class="ot">=</span> <span class="st">'./localdata/E-MTAB-8559-quantification-raw-files/'</span></span>
+<span id="cb1-2"><a></a>raw.counts <span class="ot">&lt;-</span> <span class="fu">as</span>(Matrix<span class="sc">::</span><span class="fu">readMM</span>(</span>
+<span id="cb1-3"><a></a>    <span class="fu">paste</span>(</span>
+<span id="cb1-4"><a></a>        file.path,</span>
+<span id="cb1-5"><a></a>        <span class="st">'E-MTAB-8559.aggregated_filtered_counts.mtx'</span>,</span>
+<span id="cb1-6"><a></a>        <span class="at">sep=</span><span class="st">''</span></span>
+<span id="cb1-7"><a></a>    )</span>
+<span id="cb1-8"><a></a>), <span class="st">'CsparseMatrix'</span>)</span>
+<span id="cb1-9"><a></a><span class="fu">dim</span>(raw.counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class="list-inline"><li>23284</li><li>19880</li></ol>
+</div>
+</div>
+</section>
+<section id="load-the-data-1" class="slide level2">
+<h2>Load the Data</h2>
+<div id="c09c7915-af28-4d02-b6e8-21b14de6ee23" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>row.info <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb2-2"><a></a>    <span class="fu">paste</span>(</span>
+<span id="cb2-3"><a></a>        file.path,</span>
+<span id="cb2-4"><a></a>        <span class="st">'E-MTAB-8559.aggregated_filtered_counts.mtx_rows'</span>,</span>
+<span id="cb2-5"><a></a>        <span class="at">sep=</span><span class="st">''</span></span>
+<span id="cb2-6"><a></a>    ),</span>
+<span id="cb2-7"><a></a>    <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb2-8"><a></a>    <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">"Ensembl.ID"</span>, <span class="st">"Redundant"</span>)</span>
+<span id="cb2-9"><a></a>)</span>
+<span id="cb2-10"><a></a></span>
+<span id="cb2-11"><a></a><span class="co"># Drop duplicate field in row.info</span></span>
+<span id="cb2-12"><a></a>row.info <span class="ot">&lt;-</span> row.info[<span class="st">'Ensembl.ID'</span>]</span>
+<span id="cb2-13"><a></a><span class="fu">rownames</span>(raw.counts) <span class="ot">&lt;-</span> row.info<span class="sc">$</span>Ensembl.ID</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="a32857b6-aeb8-4b2d-807a-f4b3dc0a3a96" class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       Ensembl.ID
+1 ENSG00000000003
+2 ENSG00000000419
+3 ENSG00000000457
+4 ENSG00000000460
+5 ENSG00000000938
+6 ENSG00000000971</code></pre>
+</div>
+</div>
+</section>
+<section id="load-the-data-2" class="slide level2">
+<h2>Load the Data</h2>
+<div id="15c1f745-3ac5-4dff-82e5-05fbaff0241f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>col.info <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb4-2"><a></a>    <span class="fu">paste</span>(</span>
+<span id="cb4-3"><a></a>        file.path,</span>
+<span id="cb4-4"><a></a>        <span class="st">'E-MTAB-8559.aggregated_filtered_counts.mtx_cols'</span>,</span>
+<span id="cb4-5"><a></a>        <span class="at">sep=</span><span class="st">''</span></span>
+<span id="cb4-6"><a></a>    ),</span>
+<span id="cb4-7"><a></a>    <span class="at">header=</span><span class="cn">FALSE</span>,</span>
+<span id="cb4-8"><a></a>    <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">'Cell.ID'</span>)</span>
+<span id="cb4-9"><a></a>)</span>
+<span id="cb4-10"><a></a><span class="fu">colnames</span>(raw.counts) <span class="ot">&lt;-</span> col.info<span class="sc">$</span>Cell.ID</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="32c61e09-6e58-4571-bb28-3d60a5942b3b" class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                        Cell.ID
+1 SAMEA6492740-AAACCCACAGTTAGGG
+2 SAMEA6492740-AAACCCACATGTGTCA
+3 SAMEA6492740-AAACCCAGTCGCATGC
+4 SAMEA6492740-AAACCCAGTCTTTCAT
+5 SAMEA6492740-AAACCCATCCGTGTCT
+6 SAMEA6492740-AAACCCATCCTCTCTT</code></pre>
+</div>
+</div>
+</section>
+<section id="load-the-metadata" class="slide level2">
+<h2>Load the Metadata</h2>
+<div id="d9e5ada4-f684-4fa5-bc81-e7e01565043d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Load in the experimental design matrix</span></span>
+<span id="cb6-2"><a></a>exp.design.table <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb6-3"><a></a>    <span class="st">'./localdata/ExpDesign-E-MTAB-8559.tsv'</span>,</span>
+<span id="cb6-4"><a></a>    <span class="at">header=</span><span class="cn">TRUE</span>,</span>
+<span id="cb6-5"><a></a>    <span class="at">sep=</span><span class="st">'</span><span class="sc">\t</span><span class="st">'</span></span>
+<span id="cb6-6"><a></a>)</span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a><span class="co"># We can see we have four patients in our dataset</span></span>
+<span id="cb6-9"><a></a><span class="fu">print</span>(<span class="fu">unique</span>(exp.design.table<span class="sc">$</span>Sample.Characteristic.individual))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "38b"  "59"   "74-1" "79"  </code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div id="4d266904-9dbf-40ee-8e2f-91e27cf7c943" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># For reproducibility</span></span>
+<span id="cb8-2"><a></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb8-3"><a></a></span>
+<span id="cb8-4"><a></a><span class="co"># Convenient data container</span></span>
+<span id="cb8-5"><a></a><span class="fu">library</span>(SingleCellExperiment)</span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a><span class="co"># Libraries for scRNA analysis</span></span>
+<span id="cb8-8"><a></a><span class="fu">library</span>(scran)</span>
+<span id="cb8-9"><a></a><span class="fu">library</span>(scater)</span>
+<span id="cb8-10"><a></a></span>
+<span id="cb8-11"><a></a><span class="co"># Library for cluster analysis</span></span>
+<span id="cb8-12"><a></a><span class="fu">library</span>(bluster)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="section-5" class="slide level2">
+<h2></h2>
+<div id="bf648579-075d-4ca0-b8ec-4e31f9a0f391" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Store as a SingleCellExperiment object for convenience</span></span>
+<span id="cb9-2"><a></a>ovarian.sce <span class="ot">&lt;-</span> <span class="fu">SingleCellExperiment</span>(</span>
+<span id="cb9-3"><a></a>    <span class="at">assays=</span><span class="fu">list</span>(<span class="at">counts=</span>raw.counts),</span>
+<span id="cb9-4"><a></a>)</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a><span class="co"># Add patient metadata</span></span>
+<span id="cb9-7"><a></a>ovarian.sce<span class="sc">$</span>patient <span class="ot">&lt;-</span> exp.design.table<span class="sc">$</span>Sample.Characteristic.individual.</span>
+<span id="cb9-8"><a></a></span>
+<span id="cb9-9"><a></a><span class="co"># Take a peak at internal data structure</span></span>
+<span id="cb9-10"><a></a>ovarian.sce</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 23284 19880 
+metadata(0):
+assays(1): counts
+rownames(23284): ENSG00000000003 ENSG00000000419 ... ENSG00000289701
+  ENSG00000289716
+rowData names(0):
+colnames(19880): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(1): patient
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+</section>
+<section id="why-so-much-preprocessing" class="slide level2">
+<h2>Why So Much Preprocessing?</h2>
+
+<img data-src="./images/amplification.jpeg" class="r-stretch quarto-figure-center"><p class="caption">ELI5: Wet-lab work is <em>hard</em></p></section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div id="f2a8200a-3651-4798-b2b5-d4cd7343fae4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>ovarian.sce <span class="ot">&lt;-</span> scuttle<span class="sc">::</span><span class="fu">logNormCounts</span>(ovarian.sce)</span>
+<span id="cb11-2"><a></a>ovarian.sce</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<pre><code>class: SingleCellExperiment 
+dim: 23284 19880 
+metadata(0):
+assays(2): counts logcounts
+rownames(23284): ENSG00000000003 ENSG00000000419 ... ENSG00000289701
+  ENSG00000289716
+rowData names(0):
+colnames(19880): SAMEA6492740-AAACCCACAGTTAGGG
+  SAMEA6492740-AAACCCACATGTGTCA ... SAMEA6492743-TTTGTTGGTCCTGGTG
+  SAMEA6492743-TTTGTTGTCAGATTGC
+colData names(2): patient sizeFactor
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):</code></pre>
+</div>
+</div>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div id="25079853-3880-4fe5-ba76-63d19d7a7c0b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>ovarian.sce <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">fixedPCA</span>(</span>
+<span id="cb13-2"><a></a>    ovarian.sce,</span>
+<span id="cb13-3"><a></a>    <span class="at">rank=</span><span class="dv">14</span>,</span>
+<span id="cb13-4"><a></a>    <span class="at">subset.row=</span><span class="cn">NULL</span>,</span>
+<span id="cb13-5"><a></a>    <span class="at">assay.type=</span><span class="st">"logcounts"</span></span>
+<span id="cb13-6"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<div id="6cb76ac1-0f81-425a-9309-4dfa43027d99" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>ovarian.sce <span class="ot">&lt;-</span> scater<span class="sc">::</span><span class="fu">runTSNE</span>(</span>
+<span id="cb14-2"><a></a>    ovarian.sce,</span>
+<span id="cb14-3"><a></a>    <span class="at">dimred=</span><span class="st">"PCA"</span></span>
+<span id="cb14-4"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div id="74bddc2b-9c3c-4cfc-b1c9-e8e07ae1fb78" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">plotReducedDim</span>(ovarian.sce, <span class="at">dimred=</span><span class="st">"TSNE"</span>, <span class="at">colour_by=</span><span class="st">"patient"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Journal-Club_files/figure-revealjs/cell-13-output-1.png" width="420" height="420"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="identifying-stromals" class="slide level2">
+<h2>Identifying stromals</h2>
+<div id="61412a62-afd7-4acf-af3d-00c82605b6bf" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>ovarian.sce<span class="sc">$</span>tumor.stromal.clusters <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">clusterCells</span>(</span>
+<span id="cb16-2"><a></a>    ovarian.sce,</span>
+<span id="cb16-3"><a></a>    <span class="at">use.dimred=</span><span class="st">"TSNE"</span>,</span>
+<span id="cb16-4"><a></a>    <span class="at">BLUSPARAM=</span>bluster<span class="sc">::</span><span class="fu">KmeansParam</span>(<span class="at">centers=</span><span class="dv">5</span>)</span>
+<span id="cb16-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><br></p>
+<div id="cb4f0962-0d99-4501-9c5e-b18e0aa1aaad" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># We'll assign clusters by eye since it's obvious</span></span>
+<span id="cb17-2"><a></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal <span class="ot">&lt;-</span> <span class="st">"Stromal"</span></span>
+<span id="cb17-3"><a></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor.1"</span></span>
+<span id="cb17-4"><a></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor.2"</span></span>
+<span id="cb17-5"><a></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor.3"</span></span>
+<span id="cb17-6"><a></a>ovarian.sce<span class="sc">$</span>tumor.or.stromal[ovarian.sce<span class="sc">$</span>tumor.stromal.clusters<span class="sc">==</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">"Tumor.4"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<div id="eb095edd-8271-411b-97fc-23cb54d61664" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">plotReducedDim</span>(</span>
+<span id="cb18-2"><a></a>    ovarian.sce,</span>
+<span id="cb18-3"><a></a>    <span class="st">"TSNE"</span>,</span>
+<span id="cb18-4"><a></a>    <span class="at">colour_by=</span><span class="st">"tumor.stromal.clusters"</span>,</span>
+<span id="cb18-5"><a></a>    <span class="at">text_by=</span><span class="st">"tumor.or.stromal"</span>,</span>
+<span id="cb18-6"><a></a>    <span class="at">shape_by=</span><span class="st">"patient"</span></span>
+<span id="cb18-7"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Journal-Club_files/figure-revealjs/cell-16-output-1.png" width="420" height="420"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<div id="1ccaa8e3-cdbb-462e-a799-d3e7fbba8f46" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>marker.info <span class="ot">&lt;-</span> scran<span class="sc">::</span><span class="fu">scoreMarkers</span>(</span>
+<span id="cb19-2"><a></a>    ovarian.sce,</span>
+<span id="cb19-3"><a></a>    ovarian.sce<span class="sc">$</span>tumor.stromal.clusters</span>
+<span id="cb19-4"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="bce2d0c7-9e0c-4bdb-ab1f-8beeec312937" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>cluster <span class="ot">&lt;-</span> <span class="st">"3"</span> <span class="co"># the stromal cluster</span></span>
+<span id="cb20-2"><a></a>diff.exp.gene <span class="ot">&lt;-</span> <span class="fu">rownames</span>(ovarian.sce)[</span>
+<span id="cb20-3"><a></a>    <span class="fu">order</span>(marker.info[[cluster]]<span class="sc">$</span>mean.AUC, <span class="at">decreasing=</span><span class="cn">TRUE</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb20-4"><a></a>]</span>
+<span id="cb20-5"><a></a><span class="fu">print</span>(diff.exp.gene)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ENSG00000106366"</code></pre>
+</div>
+</div>
+<div id="2c3024c1-4f27-4d66-aa29-eef933f10de4" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource R number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">plotReducedDim</span>(</span>
+<span id="cb22-2"><a></a>    ovarian.sce,</span>
+<span id="cb22-3"><a></a>    <span class="st">"TSNE"</span>,</span>
+<span id="cb22-4"><a></a>    <span class="at">colour_by=</span>diff.exp.gene,</span>
+<span id="cb22-5"><a></a>    <span class="at">shape_by=</span><span class="st">"patient"</span>,</span>
+<span id="cb22-6"><a></a>    <span class="at">text_by=</span><span class="st">"tumor.or.stromal"</span>,</span>
+<span id="cb22-7"><a></a>    <span class="at">text_colour=</span><span class="st">"cyan"</span></span>
+<span id="cb22-8"><a></a>) <span class="sc">+</span></span>
+<span id="cb22-9"><a></a>    <span class="fu">ggtitle</span>(<span class="st">"Ovarian Cancer Cells by SERPINE1 (ENSG00000106366) Expression"</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a></a>    <span class="fu">theme</span>(</span>
+<span id="cb22-11"><a></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"darkblue"</span>),</span>
+<span id="cb22-12"><a></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"cyan"</span>)</span>
+<span id="cb22-13"><a></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<div id="7d671465-9ef2-4241-8de6-068307a47a73" class="cell">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Journal-Club_files/figure-revealjs/cell-20-output-1.png" width="420" height="420"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="serpine1" class="slide level2">
+<h2>SERPINE1</h2>
+
+<img data-src="./images/serpine1-wikipedia.png" class="r-stretch quarto-figure-center"><p class="caption">PAI-1, the protein encoded by SERPINE1, is related to cancer!</p><ul>
+<li class="fragment">Form hypotheses to guide future experiments:
+<ul>
+<li class="fragment">Can SERPINE1 be a diagnostic factor?</li>
+<li class="fragment">Is it a cause or symptom of cancer?</li>
+<li class="fragment">Is it important for tumor health?</li>
+<li class="fragment">Does it affect patient wellbeing or outcomes?</li>
+<li class="fragment">Can drugs be designed to target it?</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="try-it-yourself" class="title-slide slide level1 center">
+<h1>Try It Yourself!</h1>
+
+</section>
+<section id="section-12" class="slide level2">
+<h2></h2>
+<ul>
+<li>Go to the <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Pick an interesting dataset
+<ul>
+<li>Download it</li>
+<li>Read the paper</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><b style="color:#C0CF96">Read the</b> <a href="http://bioconductor.org/books/3.13/OSCA/">Bioconductor scRNA ebooks</a><b style="color:#C0CF96">!!!</b>
+<ul>
+<li>Perhaps the best educational resource I’ve used for anything</li>
+<li>Practical and conceptual</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<ul>
+<li>Recreate their preprocessing steps</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Pick a figure in the paper and recreate it
+<ul>
+<li>We recreated <b style="color:#EB1960">Figure 5a</b> from <span class="citation" data-cites="ovarian-cancer-living-biobank">Nelson et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</section></section>
+<section id="the-end" class="title-slide slide level1 center">
+<h1><b style="color:#A6A440">The End</b></h1>
+
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1><b style="color:#537FBF">References</b></h1>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ovarian-cancer-living-biobank" class="csl-entry" role="listitem">
+Nelson, Louisa, Anthony Tighe, Anya Golder, Samantha Littler, Bjorn Bakker, Daniela Moralli, Syed Murtuza Baker, et al. 2020. <span>“A Living Biobank of Ovarian Cancer Ex Vivo Models Reveals Profound Mitotic Heterogeneity.”</span> <em>Nature Communications</em> 11 (1): 822. <a href="https://doi.org/10.1038/s41467-020-14551-2">https://doi.org/10.1038/s41467-020-14551-2</a>.
+</div>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../images/my-icon.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="../../slideshowindex.html">Return to all slideshows</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/BaileyAndrew\.github\.io\/Blog");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
